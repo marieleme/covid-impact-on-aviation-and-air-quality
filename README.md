@@ -9,3 +9,4 @@
 
 ## Resources
 - [US crime datasets](https://knoema.com/atlas/United-States-of-America/topics/Crime-Statistics/datasets)
+- [open datasets](https://github.com/awesomedata/awesome-public-datasets)
