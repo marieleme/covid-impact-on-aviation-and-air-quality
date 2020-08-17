@@ -8,7 +8,4 @@
 
 
 ## Resources
-> insert links here \ 
-> Data sets from USA - https://knoema.com/atlas/United-States-of-America/topics/Crime-Statistics/datasets 
-
-
+- [US crime datasets](https://knoema.com/atlas/United-States-of-America/topics/Crime-Statistics/datasets)
