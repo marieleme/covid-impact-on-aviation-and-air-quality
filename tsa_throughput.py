@@ -3,7 +3,7 @@ import requests
 import pandas as pd
 from matplotlib import pyplot as plt
 import locale
-from datetime import date
+from datetime import date, datetime
 
 tsa_url = "https://www.tsa.gov/coronavirus/passenger-throughput"
 
@@ -37,10 +37,15 @@ def scrub_table_from_url(url):
     return headings, data
 
 
+def convert_date(d):
+    dtobject = datetime.strptime(str(d), "%m/%d/%Y")
+    return dtobject.strftime("%Y/%m/%d")
+
+
 h, d = scrub_table_from_url(tsa_url)
 
 df = pd.DataFrame(d, columns=h)
-# df[h[0]] = df[h[0]].apply(lambda t: str(t))
+df[h[0]] = df[h[0]].apply(convert_date)
 df[h[1]] = df[h[1]].apply(lambda t: int(t.replace(',', '')))
 df[h[2]] = df[h[2]].apply(lambda t: int(t.replace(',', '')))
 
@@ -48,9 +53,11 @@ df[h[2]] = df[h[2]].apply(lambda t: int(t.replace(',', '')))
 print(df.dtypes)
 print(df)
 
-plt.figure(figsize=(20, 10))
+plt.figure(figsize=(10, 5))
 plt.tight_layout()
 ax = plt.gca()
+
+ax.invert_xaxis()
 
 df.plot(kind='line', x=h[0], y=h[1], ax=ax)
 df.plot(kind='line', x=h[0], y=h[2], color='red', ax=ax)
