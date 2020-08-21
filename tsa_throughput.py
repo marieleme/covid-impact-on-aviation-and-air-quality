@@ -47,6 +47,9 @@ df[h[2]] = df[h[2]].apply(lambda t: int(t.replace(',', '')))
 
 print(df.dtypes)
 print(df)
+
+plt.figure(figsize=(20, 10))
+plt.tight_layout()
 ax = plt.gca()
 
 df.plot(kind='line', x=h[0], y=h[1], ax=ax)
