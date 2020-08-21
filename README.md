@@ -4,8 +4,8 @@
 ## Ideas
 [ ] Relationships between death of Covid19 in states where Trump won. \
 [ ] Adoption rates during lockdown. \
-[ ] Speeding tickets  before and after a Fast&Furious premier. 
-[ ] klimaendringer og flyvninger mm. etter lockdown
+[ ] Speeding tickets  before and after a Fast&Furious premier. \
+[ ] Klimaendringer og flyvninger mm. etter lockdown. \
 
 ## Resources
 - [US crime datasets](https://knoema.com/atlas/United-States-of-America/topics/Crime-Statistics/datasets)
