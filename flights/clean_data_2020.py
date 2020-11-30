@@ -2,8 +2,6 @@ import pandas as pd
 
 months=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct']
 
-
-
 LFPG_df = pd.DataFrame(columns = ['origin', 'destination', 'total'], index=months)
 EGLL_df = pd.DataFrame(columns = ['origin', 'destination', 'total'], index=months)
 EHAM_df = pd.DataFrame(columns = ['origin', 'destination', 'total'], index=months)
@@ -15,8 +13,7 @@ RJTT_df = pd.DataFrame(columns = ['origin', 'destination', 'total'], index=month
 VHHH_df = pd.DataFrame(columns = ['origin', 'destination', 'total'], index=months)
 
 def read_csv(filename, month):
-    df = pd.read_csv(filename, usecols=[4,5])
-
+    df = pd.read_csv(filename, usecols=['origin', 'destination'])
     LFPG_dic = {'origin': 0, 'destination': 0}
     EGLL_dic = {'origin': 0, 'destination': 0}
     EHAM_dic = {'origin': 0, 'destination': 0}
