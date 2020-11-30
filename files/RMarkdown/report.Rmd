@@ -1,0 +1,14 @@
+---
+title: "Did the pandemic help the enviroment?"
+author: "Mariel Ellingsen, Steinar Hansen og Helle Sandsdalen"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This journy started with a small question. Did the pandemic help the enviroment? 
+And if so, how could we find out?
