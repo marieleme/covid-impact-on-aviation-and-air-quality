@@ -13,7 +13,7 @@ def scrub_table_from_url(url):
     html_content = requests.get(url).text
 
     # Parse the html content
-    soup = BeautifulSoup(html_content, "lxml")
+    soup = BeautifulSoup(html_content)
 
     table = soup.find("table")
     table_rows = table.tbody.find_all("tr")
