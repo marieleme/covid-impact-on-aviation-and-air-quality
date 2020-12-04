@@ -35,24 +35,31 @@ airportNames_europe = ["LFPG", "EGLL", "EHAM"]
 airportNames_usa = ["KATL", "KORD", "KLAX"]
 airportNames_asia = ["OMAA", "RJTT", "VHHH"]
 
-def plot(airpors_region, airportnames, region, year):
+def plotsub(airpors_region, airportnames, region, ylim, x):
 
     months = ["Jan", "Feb", "Mar", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
-    counter = 0
-    for i in airpors_region:
-        plt.plot(i.index.values , i['total'], label =airportnames[counter])
-        counter += 1
+    plt.subplot(2, 1, x)
+    for index, df in enumerate(airpors_region):
+        plt.plot(df.index.values , df['total'], label =airportnames[index])
 
     plt.xticks( np.arange(len(months)), months )
-    plt.xlabel('Month')
     plt.ylabel('# airplanes')
+    plt.xlabel('Month')
     plt.title(region)
-    plt.rcParams["figure.figsize"] = [10,6]
-    plt.legend()
-    plt.savefig(region)
-    plt.close()
 
+    axes = plt.gca()
+    bottom, top = axes.get_ylim()
+
+    if(ylim != 0):
+        plt.ylim(500, ylim + 5000)
+    else:
+        plt.ylim(500, top + 5000)
+
+    
+    plt.legend()
+
+    return top
 
 def calculate_moving_average(dic, months):
     values = dic[0]['total'].tolist()
@@ -65,39 +72,54 @@ def calculate_moving_average(dic, months):
         tot = values[i] + values2[i] + values3[i]
         total[i] = tot
 
-    print(total)
     df = pd.DataFrame(total, columns=["Total"])
     df['Total'] = pd.to_numeric(df['Total'])
     df['Average'] = df['Total'].rolling(window=12, min_periods=1).mean()
 
     return df
 
-def plot_moving_average(dataset_2019, dataset_2020, name):
+def plot_moving_average(dataset_2019, dataset_2020, name, row):
     months = ["Jan", "Feb", "Mar", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
+    plt.subplot(3, 1, row)
     plt.plot(dataset_2019.index.values, dataset_2019['Average'], label = "2019")
     plt.plot(dataset_2020.index.values, dataset_2020['Average'], label = "2020")
 
+    axes = plt.gca()
+    bottom, top = axes.get_ylim()
+    plt.ylim(bottom, top + 5000)
 
+    plt.title(name)
     plt.xticks( np.arange(len(months)), months )
     plt.xlabel('Month')
     plt.ylabel('Rolling mean')
-    plt.title(name)
-    plt.rcParams["figure.figsize"] = [10,6]
     plt.legend()
-    plt.savefig(name)
-    plt.close()
 
 
 def main():
-    plot(airports_europe_2019, airportNames_europe, "Europa2019", "2019")
-    plot(airports_europe_2020, airportNames_europe, "Europa2020", "2020")
+    plt.rcParams["figure.figsize"] = [10,6]
+    fig, plots = plt.subplots(2,1)
+    
+    ylim = plotsub(airports_usa_2019, airportNames_usa, "Atlanta, Chicago and LA 2019", 0, 1)
+    plotsub(airports_usa_2020, airportNames_usa, "Atlanta, Chicago and LA 2020", ylim, 2)
+    fig.tight_layout(pad=3.0)
+    plt.savefig("USASub")
+    plt.close()
 
-    plot(airports_usa_2019, airportNames_usa, "USA2019", "2019")
-    plot(airports_usa_2020, airportNames_usa, "USA2020", "2020")
 
-    plot(airports_asia_2019, airportNames_asia, "Asia2019", "2019")
-    plot(airports_asia_2020, airportNames_asia, "Asia2020", "2020")
+    fig, plots = plt.subplots(2,1)
+    ylim = plotsub(airports_asia_2019, airportNames_asia, "Abu Dhabi, Tokyo and Hong Kong 2019", 0, 1)
+    plotsub(airports_asia_2020, airportNames_asia, "Abu Dhabi, Tokyo and Hong Kong 2020", ylim, 2)
+    fig.tight_layout(pad=3.0)
+    plt.savefig("AsiaSub")
+    plt.close()
+
+    fig, plots = plt.subplots(2,1)
+    ylim = plotsub(airports_europe_2019, airportNames_europe, "Paris, England and Amsterdam 2019", 0, 1)
+    plotsub(airports_europe_2020, airportNames_europe, "Paris, England and Amsterdam 2020", ylim, 2)
+    fig.tight_layout(pad=3.0)
+    plt.savefig("EuropaSub")
+    plt.close()
 
     df_europa_2019 = calculate_moving_average(airports_europe_2019, 12)
     df_europa_2020 = calculate_moving_average(airports_europe_2020, 10)
@@ -108,9 +130,13 @@ def main():
     df_asia_2019 = calculate_moving_average(airports_asia_2019, 12)
     df_asia_2020 = calculate_moving_average(airports_asia_2020, 10)
 
-    plot_moving_average(df_europa_2019, df_europa_2020,"RollingMeanEuropa")
-    plot_moving_average(df_usa_2019, df_usa_2020,"RollingMeanUSA")
-    plot_moving_average(df_asia_2019, df_asia_2020,"RollingMeanAsia")
+    fig, plots = plt.subplots(3,1)
+    plot_moving_average(df_europa_2019, df_europa_2020,"Rolling Mean Europa", 1)
+    plot_moving_average(df_usa_2019, df_usa_2020,"Rolling Mean USA",2)
+    plot_moving_average(df_asia_2019, df_asia_2020,"Rolling Mean Asia",3)
+    fig.tight_layout(pad=3.0)
+    plt.savefig("RollingAverageSub")
+    plt.close()
 
 
 if __name__ == "__main__":
