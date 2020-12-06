@@ -13,21 +13,22 @@ def scrub_table_from_url(url):
     html_content = requests.get(url).text
 
     # Parse the html content
-    soup = BeautifulSoup(html_content)
+    soup = BeautifulSoup(html_content, 'html.parser')
 
     table = soup.find("table")
+
+    table_headers = table.thead.find("tr")
     table_rows = table.tbody.find_all("tr")
 
     headings = []
-    for td in table_rows[0].find_all("td"):
+    for td in table_headers.find_all("th"):
         # remove any newlines and extra spaces from left and right
         headings.append(td.text.replace('\n', '').replace('\t', '').strip())
 
-    print(headings)
 
     # Iterate over
     data = []
-    for row in table_rows[1:]:
+    for row in table_rows:
         tds = [td.contents[0] for td in row.find_all("td")]
         if len(tds) == 0:
             continue
@@ -37,18 +38,24 @@ def scrub_table_from_url(url):
     return headings, data
 
 
-def convert_date(d):
-    dtobject = datetime.strptime(str(d), "%m/%d/%Y")
+def convert_date(date):
+    dtobject = datetime.strptime(str(date).strip(), "%m/%d/%Y")
     return dtobject.strftime("%Y/%m/%d")
 
+def get_table(url):
+    h, d = scrub_table_from_url(url)
 
-h, d = scrub_table_from_url(tsa_url)
+    df = pd.DataFrame(d, columns=h)
+    df[h[0]] = df[h[0]].apply(convert_date)
+    df[h[1]] = df[h[1]].apply(lambda t: int(t.replace(',', '')))
+    df[h[2]] = df[h[2]].apply(lambda t: int(t.replace(',', '')))
+    return df
 
-df = pd.DataFrame(d, columns=h)
-df[h[0]] = df[h[0]].apply(convert_date)
-df[h[1]] = df[h[1]].apply(lambda t: int(t.replace(',', '')))
-df[h[2]] = df[h[2]].apply(lambda t: int(t.replace(',', '')))
 
+df0 = get_table(tsa_url)
+df1 = get_table(tsa_url+'?page=1')
+
+df = pd.concat([df0, df1])
 
 print(df.dtypes)
 print(df)
@@ -59,9 +66,9 @@ ax = plt.gca()
 
 ax.invert_xaxis()
 
-df.plot(kind='line', x=h[0], y=h[1], ax=ax)
-df.plot(kind='line', x=h[0], y=h[2], color='red', ax=ax)
+df.plot(kind='line', x=df.columns[0], y=df.columns[1], ax=ax)
+df.plot(kind='line', x=df.columns[0], y=df.columns[2], color='red', ax=ax)
 
-plt.savefig('tsa_plot.png')
+plt.savefig('tsa_plot_new.png')
 
 df.to_csv(f'tsa_data/tsa_data_{date.today()}.csv')
