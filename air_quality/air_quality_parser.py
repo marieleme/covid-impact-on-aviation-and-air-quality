@@ -3,11 +3,12 @@ import pandas as pd
 import os
 from typing import Dict, List
 from matplotlib import pyplot as plt
+from matplotlib import dates
 import datetime
 from dateutil.relativedelta import relativedelta
 
 
-def parse_file(filepath: str) -> pd.DataFrame:
+def parse_file(filepath: str, N_rolling_average=7) -> pd.DataFrame:
 
     # Read csv file to dataframe.
     df = pd.read_csv(filepath_or_buffer=filepath, delimiter=',')
@@ -28,7 +29,7 @@ def parse_file(filepath: str) -> pd.DataFrame:
     # Calculate aqi
     df['AQI'] = df[data_cols].max(axis=1)
 
-    df['7day_rolling_AQI'] = df['AQI'].rolling(7).mean()
+    df['Nday_rolling_AQI'] = df['AQI'].rolling(N_rolling_average).mean()
 
     # Map aqi to bucket values
     df['pollution_level'] = df['AQI'].apply(lambda x: aqi_converter.get_pollution_level(x))
@@ -44,11 +45,11 @@ def get_dataset_filepaths(parent_dir='waqi_datasets/', subdirs=['asia', 'us', 'e
     return {sdir: list(*os.walk(parent_dir + sdir))[2] for sdir in subdirs}
 
 
-def get_comparative_dataframe(filepath: str) -> pd.DataFrame:
-    fname, df = parse_file(filepath)
+def get_comparative_dataframe(filepath: str, N_rolling_average=7) -> pd.DataFrame:
+    fname, df = parse_file(filepath, N_rolling_average)
 
     # Pivot table to group table columns by year
-    pv = pd.pivot_table(df, index=df['date'].dt.dayofyear, columns=df['date'].dt.year, values='7day_rolling_AQI')
+    pv = pd.pivot_table(df, index=df['date'].dt.dayofyear, columns=df['date'].dt.year, values='Nday_rolling_AQI')
 
     # Extract relevant years
     df1 = pv[[2019, 2020]].copy()
@@ -60,24 +61,19 @@ def get_comparative_dataframe(filepath: str) -> pd.DataFrame:
 
     return df1
 
-def parse_all_datasets(parent_dir='waqi_datasets/'):
+def parse_all_datasets(parent_dir='waqi_datasets/', N_rolling_average=7):
 
     datasets = get_dataset_filepaths()
     r = {}
 
     for continent, cities in datasets.items():
-        r[continent] = [get_comparative_dataframe(parent_dir + continent + '/' + city) for city in cities]
+        r[continent] = [get_comparative_dataframe(parent_dir + continent + '/' + city, N_rolling_average) for city in cities]
 
     return r
 
-def plot_comparative_df(df, i):
-    ax = plt.gca()
-    df.plot(kind='line', y=2019, ax=ax)
-    df.plot(kind='line', y=2020, ax=ax)
-    plt.show()
 
-def combine_region_dfs():
-    dfmap = parse_all_datasets()
+def combined_region_dfs(N_rolling_average=7):
+    dfmap = parse_all_datasets(N_rolling_average=N_rolling_average)
 
     regionlist = {}
 
@@ -91,25 +87,32 @@ def combine_region_dfs():
         combined_df[region + '-mean-2020'] = combined_df[cols2020].mean(axis=1)
 
         regionlist[region] = combined_df
-        
-    print(regionlist)
+
     return regionlist
 
-def plot_regions():
-    dfs = combine_region_dfs()
+def plot_regions(path='', plot=True, save=False, N_rolling_average=7):
+    dfs = combined_region_dfs(N_rolling_average)
+
+    def get_label(region, year): return region + '-' + str(N_rolling_average) + '-day-rolling-avg-' + str(year)
 
     for region, df in dfs.items():
-        lines = [region + '-mean-2019', region + '-mean-2019']
-        df.plot(kind='line', y=lines)
+        fig = plt.figure()
+        ax = plt.gca()
+
+        lines = [region + '-mean-2019', region + '-mean-2020']
+        labels = [get_label(region, 2019), get_label(region, 2020)]
+        df.plot(kind='line', y=lines, ax=ax, label=labels)
+
+        ax.xaxis.set_major_locator(dates.MonthLocator(interval=1))
+        fig.set_figheight(5)
+        fig.set_figwidth(15)
+        if save:
+            plt.savefig(path+region+'_'+str(N_rolling_average)+'day_rolling_average'+'.png')
+        if plot:
+            plt.show()
 
 
 if __name__ == "__main__":
-    # print(parse_all_datasets())
+    plot_regions(path='../figures/',plot=False, save=True, N_rolling_average=7)
+    plot_regions(path='../figures/',plot=False, save=True, N_rolling_average=30)
 
-    # get_comparative_dataframe('waqi_datasets/us/los-angeles-north main street-air-quality.csv')
-    # i = 0
-    # for key, value in parse_all_datasets().items():
-    #     for fname, df in value:
-    #         plot_comparative_df(df, i)
-    #         i += 1
-    combine_region_dfs()
