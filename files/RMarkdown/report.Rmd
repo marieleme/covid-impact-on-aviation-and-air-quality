@@ -10,5 +10,23 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+# Introduction: Provide context and motivation. What questions are being addressed? Why are these questions interesting or important? 
+I mange år har vi vist om den 
+
 This journy started with a small question. Did the pandemic help the enviroment? 
 And if so, how could we find out?
+
+
+# Related Work: What other methods have addressed these or similar questions? How do these methods differ from your method?
+
+
+# Solution/Method: What did you do? What tools and techniques did you use? Was any innovation attempted?
+
+
+# Data and Experiments: What data did you use? Are your experimental methods reliable? What preprocessing was done on the data?
+
+
+# Evaluation and Results: Did you properly evaluate your experiments? Did you test for statistical significance? Do your conclusions match your results?
+
+
+# Writing Quality: Clarity of writing, organization, and grammar.
