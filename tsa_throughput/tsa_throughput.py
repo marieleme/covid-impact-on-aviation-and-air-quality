@@ -66,9 +66,13 @@ ax = plt.gca()
 
 ax.invert_xaxis()
 
-df.plot(kind='line', x=df.columns[0], y=df.columns[1], ax=ax)
 df.plot(kind='line', x=df.columns[0], y=df.columns[2], color='red', ax=ax)
+df.plot(kind='line', x=df.columns[0], y=df.columns[1], ax=ax)
+
+plt.title('Total travelers that passed through TSA checkpoints per day (daily flights in USA)')
+plt.ylabel('total travelers (in millions)')
 
 plt.savefig('tsa_plot_new.png')
+plt.show()
 
 df.to_csv(f'tsa_data/tsa_data_{date.today()}.csv')
