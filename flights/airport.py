@@ -3,25 +3,25 @@ import matplotlib.pyplot as plt
 import calendar
 import numpy as np 
 
-LFPG_df = pd.read_csv("simpleData/LFPG_2019")
-EGLL_df = pd.read_csv("simpleData/EGLL_2019")
-EHAM_df = pd.read_csv("simpleData/EHAM_2019")
-KATL_df = pd.read_csv("simpleData/KATL_2019")
-KORD_df = pd.read_csv("simpleData/KORD_2019")
-KLAX_df = pd.read_csv("simpleData/KLAX_2019")
-OMAA_df = pd.read_csv("simpleData/OMAA_2019")
-RJTT_df = pd.read_csv("simpleData/RJTT_2019")
-VHHH_df = pd.read_csv("simpleData/VHHH_2019")
+LFPG_df = pd.read_csv("flights/simpleData/LFPG_2019")
+EGLL_df = pd.read_csv("flights/simpleData/EGLL_2019")
+EHAM_df = pd.read_csv("flights/simpleData/EHAM_2019")
+KATL_df = pd.read_csv("flights/simpleData/KATL_2019")
+KORD_df = pd.read_csv("flights/simpleData/KORD_2019")
+KLAX_df = pd.read_csv("flights/simpleData/KLAX_2019")
+OMAA_df = pd.read_csv("flights/simpleData/OMAA_2019")
+RJTT_df = pd.read_csv("flights/simpleData/RJTT_2019")
+VHHH_df = pd.read_csv("flights/simpleData/VHHH_2019")
 
-LFPG_df_2020 = pd.read_csv("simpleData/LFPG_2020")
-EGLL_df_2020 = pd.read_csv("simpleData/EGLL_2020")
-EHAM_df_2020 = pd.read_csv("simpleData/EHAM_2020")
-KATL_df_2020 = pd.read_csv("simpleData/KATL_2020")
-KORD_df_2020 = pd.read_csv("simpleData/KORD_2020")
-KLAX_df_2020 = pd.read_csv("simpleData/KLAX_2020")
-OMAA_df_2020 = pd.read_csv("simpleData/OMAA_2020")
-RJTT_df_2020 = pd.read_csv("simpleData/RJTT_2020")
-VHHH_df_2020 = pd.read_csv("simpleData/VHHH_2020")
+LFPG_df_2020 = pd.read_csv("flights/simpleData/LFPG_2020")
+EGLL_df_2020 = pd.read_csv("flights/simpleData/EGLL_2020")
+EHAM_df_2020 = pd.read_csv("flights/simpleData/EHAM_2020")
+KATL_df_2020 = pd.read_csv("flights/simpleData/KATL_2020")
+KORD_df_2020 = pd.read_csv("flights/simpleData/KORD_2020")
+KLAX_df_2020 = pd.read_csv("flights/simpleData/KLAX_2020")
+OMAA_df_2020 = pd.read_csv("flights/simpleData/OMAA_2020")
+RJTT_df_2020 = pd.read_csv("flights/simpleData/RJTT_2020")
+VHHH_df_2020 = pd.read_csv("flights/simpleData/VHHH_2020")
 
 airports_europe_2019 = [LFPG_df, EGLL_df, EHAM_df]
 airports_usa_2019 = [KATL_df, KORD_df, KLAX_df]
@@ -34,6 +34,33 @@ airports_asia_2020 = [OMAA_df_2020, RJTT_df_2020, VHHH_df_2020]
 airportNames_europe = ["LFPG", "EGLL", "EHAM"]
 airportNames_usa = ["KATL", "KORD", "KLAX"]
 airportNames_asia = ["OMAA", "RJTT", "VHHH"]
+
+def to_df_helper(df, old_df, nm):
+    df[nm] = old_df['Average']
+    return df 
+
+def make_list_helper():
+    eu_2019 = calculate_moving_average(airports_europe_2019, 12)
+    eu_2020 = calculate_moving_average(airports_europe_2020, 10)
+    
+    us_2019 = calculate_moving_average(airports_usa_2019, 12)
+    us_2020 = calculate_moving_average(airports_usa_2020, 10)
+    
+    asia_2019 = calculate_moving_average(airports_asia_2019, 12)
+    asia_2020 = calculate_moving_average(airports_asia_2020, 10)
+    
+    return [(eu_2019, 'eu_2019'), (eu_2020,'eu_2020'), (us_2019,'us_2019'), (us_2020,'us_2020'), (asia_2019,'asia_2019'), (asia_2020,'asia_2020')]
+
+
+def to_df(): 
+    df = pd.DataFrame()
+    df_list = make_list_helper()
+
+    for d, nm in df_list:
+        df = to_df_helper(df, d, nm)
+
+    return df
+
 
 def plotsub(airpors_region, airportnames, region, ylim, x):
 

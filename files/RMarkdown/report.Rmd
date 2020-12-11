@@ -11,7 +11,25 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Introduction: Provide context and motivation. What questions are being addressed? Why are these questions interesting or important? 
-I mange år har vi vist om den 
+# Begynne med å snakke om innvirkningen av klimakrisa på verden, nevne faktorer som bidrar og at det 
+# ikke bare er oppvarming men livskvalitet det går ut over
+
+# Referere til noe statistikk om når det er for sent å snu
+
+# Nevne hvor stor del av flytrafikken som påvirker dette, basert på fakta av andre forskere
+
+# Pandemien har restriktert reising, og har dermed teoretisk påvirket flyreiser.
+
+# Med dette in mind, har luftkvaliteten også kanskje blitt påvirket?
+
+# impact on peoples regular traveling habits, etc, how has this made an impact on the air traffic (?) 
+
+# If there is a notifiable reduction in air traffic, could this be reflected from decreased air pollution (?)
+  
+# Har pandemien påvirket lufttrafikken, og hvis så, har luftkvaliteten også blitt påvirket?
+
+
+
 
 This journy started with a small question. Did the pandemic help the enviroment? 
 And if so, how could we find out?

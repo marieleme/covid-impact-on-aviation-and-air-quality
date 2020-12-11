@@ -1,4 +1,4 @@
-import aqi_converter
+# import aqi_converter
 import pandas as pd
 import os
 from typing import Dict, List
@@ -7,6 +7,21 @@ from matplotlib import dates
 import datetime
 from dateutil.relativedelta import relativedelta
 
+def get_pollution_level(x):
+    if x <= 50:
+        return "Good"
+    elif x <= 100:
+        return "Moderate"
+    elif x <= 150:
+        return "Unhealthy for Sensitive Groups"
+    elif x <= 200:
+        return "Unhealthy"
+    elif x <= 300:
+        return "Very Unhealthy"
+    elif x > 300:
+        return "Hazardous"
+    else:
+        return "NaN"
 
 def parse_file(filepath: str, N_rolling_average=7) -> pd.DataFrame:
 
@@ -32,14 +47,14 @@ def parse_file(filepath: str, N_rolling_average=7) -> pd.DataFrame:
     df['Nday_rolling_AQI'] = df['AQI'].rolling(N_rolling_average).mean()
 
     # Map aqi to bucket values
-    df['pollution_level'] = df['AQI'].apply(lambda x: aqi_converter.get_pollution_level(x))
+    df['pollution_level'] = df['AQI'].apply(lambda x: get_pollution_level(x))
 
     # Get filename from last entry in filepath and remove .csv extension
     fname = filepath.split('/')[-1][:-4]
 
     return (fname, df)
 
-def get_dataset_filepaths(parent_dir='waqi_datasets/', subdirs=['asia', 'us', 'eu']) -> Dict[str, List[str]]:
+def get_dataset_filepaths(parent_dir='air_quality/waqi_datasets/', subdirs=['asia', 'us', 'eu']) -> Dict[str, List[str]]:
     """Reads filepaths from subdirs in parent dir and returns dict with {subdir: [files_in_subdir]}."""
 
     return {sdir: list(*os.walk(parent_dir + sdir))[2] for sdir in subdirs}
@@ -61,7 +76,7 @@ def get_comparative_dataframe(filepath: str, N_rolling_average=7) -> pd.DataFram
 
     return df1
 
-def parse_all_datasets(parent_dir='waqi_datasets/', N_rolling_average=7):
+def parse_all_datasets(parent_dir='air_quality/waqi_datasets/', N_rolling_average=7):
 
     datasets = get_dataset_filepaths()
     r = {}
