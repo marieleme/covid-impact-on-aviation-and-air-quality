@@ -1,5 +1,4 @@
 from pandas.core.frame import DataFrame
-import aqi_converter
 import pandas as pd
 import os
 from typing import Dict, List
@@ -15,6 +14,22 @@ def set_config(avg, scale):
     config['rolling_avg'] = avg
     config['scale'] = scale
 
+def get_pollution_level(x):
+    if x <= 50:
+        return "Good"
+    elif x <= 100:
+        return "Moderate"
+    elif x <= 150:
+        return "Unhealthy for Sensitive Groups"
+    elif x <= 200:
+        return "Unhealthy"
+    elif x <= 300:
+        return "Very Unhealthy"
+    elif x > 300:
+        return "Hazardous"
+    else:
+        return "NaN"
+
 def parse_file(filepath: str) -> pd.DataFrame:
 
     # Read csv file to dataframe.
@@ -29,7 +44,8 @@ def parse_file(filepath: str) -> pd.DataFrame:
 
     if ' pm10' in df.columns:
         # Drop entries without pm measurements
-        df = df.drop(df[df[[' pm25', ' pm10']].count(axis=1) == 0].index)
+        if ' pm10' in df.columns:
+            df = df.drop(df[df[[' pm25', ' pm10']].count(axis=1) == 0].index)
     else:
         # Special case for when only pm25 is present
         df = df.drop(df[df[[' pm25']].count(axis=1) == 0].index)
@@ -41,15 +57,15 @@ def parse_file(filepath: str) -> pd.DataFrame:
     df['Nday_rolling_AQI'] = df['AQI'].rolling(window=config['rolling_avg'], min_periods=1).median()
 
     # Map aqi to bucket values
-    df['pollution_level'] = df['AQI'].apply(lambda x: aqi_converter.get_pollution_level(x))
+    df['pollution_level'] = df['AQI'].apply(lambda x: get_pollution_level(x))
 
     # Get filename from last entry in filepath and remove .csv extension
     fname = filepath.split('/')[-1][:-4]
 
     return (fname, df)
 
-def get_dataset_filepaths(parent_dir='waqi_datasets/', subdirs=['asia', 'us', 'eu']) -> Dict[str, List[str]]:
-    """ Reads filepaths from subdirs in parent dir and returns dict with {subdir: [files_in_subdir]}."""
+def get_dataset_filepaths(parent_dir='air_quality/waqi_datasets/', subdirs=['asia', 'us', 'eu']) -> Dict[str, List[str]]:
+    """Reads filepaths from subdirs in parent dir and returns dict with {subdir: [files_in_subdir]}."""
 
     return {sdir: list(*os.walk(parent_dir + sdir))[2] for sdir in subdirs}
 
@@ -73,7 +89,7 @@ def get_comparative_dataframe(filepath: str) -> pd.DataFrame:
         df1[2020] = df1[2020].apply(lambda x: x/dfmax)
 
     # Convert from ordinal(1-365) dates to regular date values
-    df1.index = df1.index.map(datetime.date.fromordinal).map(lambda x: x + relativedelta(years=2019))
+    # df1.index = df1.index.map(datetime.date.fromordinal).map(lambda x: x + relativedelta(years=2019))
 
     # Rename all column to include cityname in label 
     df1.columns = [fname + '-' + str(colname) for colname in df1.columns]
