@@ -38,8 +38,8 @@ def plot_global_total(df_2019, df_2020):
 
     months = ["Jan", "Feb", "Mar", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
-    plt.plot(df_2019.index.values, df_2019['total'], label="2019")
-    plt.plot(df_2020.index.values, df_2020['total'], label="2020")
+    plt.plot(df_2019['total'], label="2019")
+    plt.plot(df_2020['total'], label="2020")
 
     plt.xticks([0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334], months )
     plt.xlim(0,365)
@@ -58,6 +58,9 @@ def main():
 
     global_df_2019 = sum_dataframes(airports_df_2019, "2019", airportNames)
     global_df_2020 = sum_dataframes(airports_df_2020, "2020", airportNames)
+
+    print(global_df_2019)
+    print(global_df_2020)
 
     plot_global_total(global_df_2019, global_df_2020)
 
