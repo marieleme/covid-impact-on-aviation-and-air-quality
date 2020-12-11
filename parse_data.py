@@ -5,7 +5,7 @@ import air_quality.air_quality_parser as aqp
 import flights.Global30Rolling as air
 
 def get_dataframes(cont):
-    df_aq = aqp.combined_region_dfs(7)
+    df_aq = aqp.combined_region_dfs()
     df_19, df_20= air.sum_df(cont)
     return df_aq, df_20
 
