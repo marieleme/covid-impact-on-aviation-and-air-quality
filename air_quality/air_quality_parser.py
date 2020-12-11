@@ -191,7 +191,7 @@ def plot_regions(path='', plot=True, save=False, N_rolling_average=7, scale=Fals
 
         months = ["Jan", "Feb", "Mar", "Apr", "Mai", "Jun",
                   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-        ax.set_xticks(ax.get_xticks().tolist()[:-1])
+        ax.set_xticks(ax.get_xticks().tolist()[0:12])
         ax.set_xticklabels(months)
 
         plt.xlabel('Start of Month')
@@ -214,6 +214,33 @@ def plot_regions(path='', plot=True, save=False, N_rolling_average=7, scale=Fals
         if plot:
             plt.show()
 
+def data_stats():
+    dfs = combined_region_dfs()
+
+    global_df = pd.concat(dfs.values(), axis=1, sort=False)
+
+    meancols = [col for col in global_df.columns if 'mean' in col]
+
+    means = global_df[meancols].mean()
+    print(means)
+
+    mean2019 = 0.0
+    mean2020 = 0.0
+
+    for name, val in means.items():
+        if '2019' in name:
+            mean2019 += val
+        if '2020' in name:
+            mean2020 += val
+
+    mean2019 /= 3.0
+    mean2020 /= 3.0
+
+    global_improvement = (1 - mean2020/mean2019) * 100
+
+    print(f'global mean AQI 2019: {mean2019}, global mean AQI 2020: {mean2020}')
+    print(f'air quality in 2020 is {global_improvement:.2f}% better in our sample data')
+
 
 if __name__ == "__main__":
     combine_all_regions(path='../figures/', plot=False, save=True, N_rolling_average=7)
@@ -223,3 +250,5 @@ if __name__ == "__main__":
     combine_all_regions(path='../figures/', plot=False, save=True, N_rolling_average=7, scale=True)
     plot_regions(path='../figures/', plot=False, save=True, N_rolling_average=7, scale=True)
     plot_regions(path='../figures/', plot=False, save=True, N_rolling_average=30, scale=True)
+
+    data_stats()
