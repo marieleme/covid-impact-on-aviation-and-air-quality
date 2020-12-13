@@ -88,5 +88,56 @@ data was collected and treated before using a library called matplotlib to displ
 ### Flight data 
 **(Xavier Olive, Martin Strohmeier, & Jannis Lübbe. (2020). Crowdsourced air traffic data from The OpenSky Network 2020 (Version v20.11) [Data set]. Zenodo. http://doi.org/10.5281/zenodo.4299837) CITE AS THIS ??????**
 
+The flight data used is collected by the OpenSky Network 2020. Their data disclaimer:
 
+#### Disclaimer from OpenSky Network 2020:
+The data provided in the files is provided as is. Despite our best efforts at filtering out potential issues, some information could be erroneous.
+* Origin and destination airports are computed online based on the ADS-B trajectories on approach/takeoff: no crosschecking with external sources of data has been conducted. Fields **origin** or **destination** are empty when no airport could be found.
+* Aircraft information come from the OpenSky aircraft database. Fields **typecode** and **registration** are empty when the aircraft is not present in the database.
+
+With this in mind, the data would not be exact, but it gives a good estimate and we therefore thought it would give us the data we needed in terms of 
+this research. We first thought of using data from  https://www.flightradar24.com/, which may have more accurate data, but this source demands payment 
+for historical data. 
+
+Data sets from 2019-01-01 until 2020-10-31 are downloaded and simplified. The data sets are simplified such that there is one dataframe per airport with 
+daily data. Each data frame contains total flights on each day, as well as calculating 7 days rolling average as well as 30 days rolling average. 
+These datasets are used for analysis and visualization. 
+
+We have used the origin and destination columns in the datasets to calculate how many aircrafts leaving or approaching the respective airports. When 
+the columns origin or destination in the original data sets is empty, they are ignored and not counted on one of our chosen airports.
+
+### Air data
+The air quality data used in this survey is collected from the [World Air Quality Index project](https://aqicn.org). This collects data from many open 
+quality sources around the world, including government funded sensor data and independent sensors. This results in a very comprehensive set of air 
+quality sensor data from many cities around the world.
+
+The datasets downloaded from aqicn show the computed air quality index for the measured pollutant concentrations. Air Quality Index is a value that 
+represents the air quality of the air calculated from the measured pollutants. The value is divided into six ranges, from good at 0-50 AQI to hazardous 
+at 300+ AQI. The individual values are calculated based on the US EPA [scale](https://www.airnow.gov/aqi/aqi-basics/). The total aqi is the maximal 
+value of any of the pollutants. 
+
+As our focus is on comparing air quality related to air travel we chose to use the measuring station closest to the airport when possible. We tried to 
+probe for stations that provided reliable measurements over the estimation period which led to us sometimes picking a station further from the given 
+airport. A disadvantage of using only one measuring station is there could be selection biases from our end where we only use stations that prove our 
+theory or the station measurements could be biased in one direction or another. 
+
+It should also be mentioned that air quality can be affected by many different factors. In 2017 27% of emissions came from the transport sector, of 
+which 71% came from the automotive industry and only 14% came from aviation. [Source.](https://www.eea.europa.eu/data-and-maps/indicators/transport-emissions-of-greenhouse-gases/transport-emissions-of-greenhouse-gases-12)
+
+# Exploratory Analysis
+
+The goal of the visualisation of the gathered data, was to see if there was a dip in aviation during lockdown months, if there was a clear distinction 
+in air quality after the lockdown months, and if both the air traffic and air quality plots would have a coherence. 
+
+To analyze and visualize the air traffic we used the data in different ways. First we extracted only the total number of flights per month per airport. 
+From this it was possible to see the desired results, but it did not depict the movement of the data.  
+
+Further, we extracted daily data for the airports which we used to calculate both 7 and 30 days rolling average and plotted this instead. This was a 
+better way to see the movement of the data, as well as it depicted the desired results. After analyzing both the 7 and 30 days rolling average, we 
+concluded that the 30 days moving average was sufficient to see both the data movement and the results. 
+
+At last, to get an overall insight on the global impact, we summarized all the 30 days moving average of the respective airports. This way, we could 
+clearly see the impact that covid-19 had globally, from our airports.  
+
+# Final analysis
 
