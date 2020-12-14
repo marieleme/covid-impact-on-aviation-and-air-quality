@@ -86,13 +86,12 @@ The data we used in our preparatory work was gathered from the TSA website using
 data was collected and treated before using a library called matplotlib to display it.  
 
 ### Flight data 
-**(Xavier Olive, Martin Strohmeier, & Jannis Lübbe. (2020). Crowdsourced air traffic data from The OpenSky Network 2020 (Version v20.11) [Data set]. Zenodo. http://doi.org/10.5281/zenodo.4299837) CITE AS THIS ??????**
-
-The flight data used is collected by the OpenSky Network 2020. Their data disclaimer:
+The air traffic data used is crowded sourced air traffic data from the [OpenSky Network 2020](http://doi.org/10.5281/zenodo.4299837) (version v20.11). Their data disclaimer:
 
 #### Disclaimer from OpenSky Network 2020:
 The data provided in the files is provided as is. Despite our best efforts at filtering out potential issues, some information could be erroneous.
-* Origin and destination airports are computed online based on the ADS-B trajectories on approach/takeoff: no crosschecking with external sources of data has been conducted. Fields **origin** or **destination** are empty when no airport could be found.
+ 
+* Origin and destination airports are computed online based on the ADS-B trajectories on approach/takeoff: no  crosschecking with external sources of data has been conducted. Fields **origin** or **destination** are empty when | no airport could be found.
 * Aircraft information come from the OpenSky aircraft database. Fields **typecode** and **registration** are empty when the aircraft is not present in the database.
 
 With this in mind, the data would not be exact, but it gives a good estimate and we therefore thought it would give us the data we needed in terms of 
@@ -140,4 +139,24 @@ At last, to get an overall insight on the global impact, we summarized all the 3
 clearly see the impact that covid-19 had globally, from our airports.  
 
 # Final analysis
+### Aviation
+```{r, echo=FALSE, fig.show="hold", out.width="80%", out.height="80%",fig.align='center'}
+knitr::include_graphics(c("../.././flights/graphs/30DaysRollingAvgAsia.png", "../.././flights/graphs/30DaysRollingAvgEurope.png", "../.././flights/graphs/30DaysRollingAvgUSA.png"))
+``` 
+As the pandemic spread world wide, the countries around the world had to make drastic changes to try to control the spread of the virus. One of the restrictions almost all countries made was to lock down the cities and close their borders to tourists and immigrants. In theory, this would naturally decrease the aviation to and from these airports.
+ 
+In figure X three different airports from the USA, Asia and Europe are depicted. The top graph is the 30 days rolling average of the number of aircrafts leaving or approaching the respective airports in 2019, while the bottom graph is for the same, just 2020. From these graphs, it is possible to see that around mars/april, the aviation decreased drastically, at the same time as countries introduced the lockdown. Since we have used the 30 days rolling average, and it is calculated from January, the effects come one month later than when it actually happened. 
 
+What we can conclude from these findings, and the graphs depicted above, is that covid-19 had a massive effect on global aviation. Since the countries around the world had to close their borders the foreign flights from these airports stopped, as well as many domestic flights because of city lockdowns.
+
+```{r, echo=FALSE, out.width="60%", out.height="60%", fig,show="hold", fig.align='center'}
+knitr::include_graphics(c("../.././flights/graphs/global30days.png"))
+``` 
+
+In figure X, we have summed the 30 days rolling mean of the respective airports, to get an insight of the effect combined. What we see here, which we also saw in the earlier results from each airport, is that the aviation decreased a lot. In April/May the total aviation traffic decreased with 80%. 
+
+Further, we see in all graphs that in August/September the aviation traffic increases again. This may be due to the fact that countries around the world started to open up slowly, at least opening for domestic flights. People started going back to work, and companies desired that people came back to the workplace, causing the traveling to increase.
+
+To summarize, global aviation has suffered a high decrease due to the global pandemic caused by covid-19. Due to the interesting findings which substantiates our original hypothesis, we further investigated if the reduction in aviation traffic had any impact on the air quality of the respective cities. 
+
+### Air quality
