@@ -64,7 +64,7 @@ def parse_file(filepath: str) -> pd.DataFrame:
 
     return (fname, df)
 
-def get_dataset_filepaths(parent_dir='air_quality/waqi_datasets/', subdirs=['asia', 'us', 'eu']) -> Dict[str, List[str]]:
+def get_dataset_filepaths(parent_dir='waqi_datasets/', subdirs=['asia', 'us', 'eu']) -> Dict[str, List[str]]:
     """Reads filepaths from subdirs in parent dir and returns dict with {subdir: [files_in_subdir]}."""
 
     return {sdir: list(*os.walk(parent_dir + sdir))[2] for sdir in subdirs}
@@ -99,7 +99,7 @@ def get_comparative_dataframe(filepath: str) -> pd.DataFrame:
 
 def parse_all_datasets(parent_dir='waqi_datasets/'):
 
-    datasets = get_dataset_filepaths()
+    datasets = get_dataset_filepaths(parent_dir)
     r = {}
 
     # Reads all files and maps the comparative dataframes to their region
@@ -109,12 +109,12 @@ def parse_all_datasets(parent_dir='waqi_datasets/'):
     return r
 
 
-def combined_region_dfs() -> Dict[str, DataFrame]:
+def combined_region_dfs(parent_dir='waqi_datasets/') -> Dict[str, DataFrame]:
     """ For all regions will return dataframe with 2019 and 2020 data for all cities in region and combined mean
         Returns dict{'us|eu|asia': dataframe}
     """
 
-    dfmap = parse_all_datasets()
+    dfmap = parse_all_datasets(parent_dir)
 
     region_dict = {}
 
@@ -230,41 +230,46 @@ def plot_regions(path='', plot=True, save=False, N_rolling_average=7, scale=Fals
         if plot:
             plt.show()
 
+def calculate_means(df):
+    meancols = [
+        col for col in df.columns if 'mean' not in col]
+
+    means = df[meancols].mean()
+
+    vals2019 = [val for name, val in means.items() if '2019' in name]
+    vals2020 = [val for name, val in means.items() if '2020' in name]
+
+    mean2019 = sum(vals2019) / len(vals2019)
+    mean2020 = sum(vals2020) / len(vals2020)
+
+    global_improvement = (1 - mean2020/mean2019) * 100
+
+    return mean2019, mean2020, global_improvement
+
 def data_stats():
     dfs = combined_region_dfs()
 
     global_df = pd.concat(dfs.values(), axis=1, sort=False)
 
-    meancols = [col for col in global_df.columns if 'mean' in col]
+    mean2019, mean2020, global_improvement = calculate_means(global_df)
 
-    means = global_df[meancols].mean()
-    print(means)
-
-    mean2019 = 0.0
-    mean2020 = 0.0
-
-    for name, val in means.items():
-        if '2019' in name:
-            mean2019 += val
-        if '2020' in name:
-            mean2020 += val
-
-    mean2019 /= 3.0
-    mean2020 /= 3.0
-
-    global_improvement = (1 - mean2020/mean2019) * 100
-
-    print(f'global mean AQI 2019: {mean2019}, global mean AQI 2020: {mean2020}')
+    print(f'global mean AQI 2019: {mean2019:.2f}, global mean AQI 2020: {mean2020:.2f}')
     print(f'air quality in 2020 is {global_improvement:.2f}% better in our sample data')
 
+    first_half_df = global_df[global_df.index < 366/2]
+
+    mean2019, mean2020, global_improvement = calculate_means(first_half_df)
+
+    print(f'mean AQI first half of 2019: {mean2019:.2f}, mean AQI first half of 2020: {mean2020:.2f}')
+    print(f'air quality in 2020 is {global_improvement:.2f}% better in our sample data for first half of the year')
 
 if __name__ == "__main__":
     combine_all_regions(path='../figures/', plot=False, save=True, N_rolling_average=7)
     plot_regions(path='../figures/', plot=False, save=True, N_rolling_average=7)
     plot_regions(path='../figures/', plot=False, save=True, N_rolling_average=30)
 
-    combine_all_regions(path='../figures/', plot=False, save=True, N_rolling_average=7, scale=True)
-    plot_regions(path='../figures/', plot=False, save=True, N_rolling_average=7, scale=True)
-    plot_regions(path='../figures/', plot=False, save=True, N_rolling_average=30, scale=True)
+    # combine_all_regions(path='../figures/', plot=False, save=True, N_rolling_average=7, scale=True)
+    # plot_regions(path='../figures/', plot=False, save=True, N_rolling_average=7, scale=True)
+    # plot_regions(path='../figures/', plot=False, save=True, N_rolling_average=30, scale=True)
 
     data_stats()
