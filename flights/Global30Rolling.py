@@ -2,25 +2,25 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-LFPG_df = pd.read_csv("flights/dailyDataSets/LFPG_2019")
-EGLL_df = pd.read_csv("flights/dailyDataSets/EGLL_2019")
-EHAM_df = pd.read_csv("flights/dailyDataSets/EHAM_2019")
-KJFK_df = pd.read_csv("flights/dailyDataSets/KJFK_2019")
-KORD_df = pd.read_csv("flights/dailyDataSets/KORD_2019")
-KLAX_df = pd.read_csv("flights/dailyDataSets/KLAX_2019")
-VIDP_df = pd.read_csv("flights/dailyDataSets/VIDP_2019")
-RJTT_df = pd.read_csv("flights/dailyDataSets/RJTT_2019")
-VHHH_df = pd.read_csv("flights/dailyDataSets/VHHH_2019")
+LFPG_df = pd.read_csv("dailyDataSets/LFPG_2019")
+EGLL_df = pd.read_csv("dailyDataSets/EGLL_2019")
+EHAM_df = pd.read_csv("dailyDataSets/EHAM_2019")
+KJFK_df = pd.read_csv("dailyDataSets/KJFK_2019")
+KORD_df = pd.read_csv("dailyDataSets/KORD_2019")
+KLAX_df = pd.read_csv("dailyDataSets/KLAX_2019")
+VIDP_df = pd.read_csv("dailyDataSets/VIDP_2019")
+RJTT_df = pd.read_csv("dailyDataSets/RJTT_2019")
+VHHH_df = pd.read_csv("dailyDataSets/VHHH_2019")
 
-LFPG_df_2020 = pd.read_csv("flights/dailyDataSets/LFPG_2020")
-EGLL_df_2020 = pd.read_csv("flights/dailyDataSets/EGLL_2020")
-EHAM_df_2020 = pd.read_csv("flights/dailyDataSets/EHAM_2020")
-KJFK_df_2020 = pd.read_csv("flights/dailyDataSets/KJFK_2020")
-KORD_df_2020 = pd.read_csv("flights/dailyDataSets/KORD_2020")
-KLAX_df_2020 = pd.read_csv("flights/dailyDataSets/KLAX_2020")
-VIDP_df_2020 = pd.read_csv("flights/dailyDataSets/VIDP_2020")
-RJTT_df_2020 = pd.read_csv("flights/dailyDataSets/RJTT_2020")
-VHHH_df_2020 = pd.read_csv("flights/dailyDataSets/VHHH_2020")
+LFPG_df_2020 = pd.read_csv("dailyDataSets/LFPG_2020")
+EGLL_df_2020 = pd.read_csv("dailyDataSets/EGLL_2020")
+EHAM_df_2020 = pd.read_csv("dailyDataSets/EHAM_2020")
+KJFK_df_2020 = pd.read_csv("dailyDataSets/KJFK_2020")
+KORD_df_2020 = pd.read_csv("dailyDataSets/KORD_2020")
+KLAX_df_2020 = pd.read_csv("dailyDataSets/KLAX_2020")
+VIDP_df_2020 = pd.read_csv("dailyDataSets/VIDP_2020")
+RJTT_df_2020 = pd.read_csv("dailyDataSets/RJTT_2020")
+VHHH_df_2020 = pd.read_csv("dailyDataSets/VHHH_2020")
 
 
 def sum_dataframes(airpots, year, airport_names):
@@ -46,7 +46,7 @@ def plot_global_total(df_2019, df_2020):
 
     plt.ylabel('# airplanes')
     plt.xlabel('Month')
-    plt.title("All airports 30 days rolling")
+    plt.title("All airports 30 days rolling mean")
     plt.legend()
     plt.savefig("global30days")
 
