@@ -152,7 +152,7 @@ def combine_all_regions(path='', plot=True, save=True, N_rolling_average=7, scal
     fig = plt.figure()
     ax = plt.gca()
 
-    global_df.plot(kind='line', y=['global-mean-2019', 'global-mean-2020'], ax=ax)
+    global_df.plot(kind='line', y=['global-mean-2019', 'global-mean-2020'], ax=ax, label=['global mean 2019', 'global mean 2020'])
 
     ax.xaxis.set_major_locator(dates.MonthLocator(interval=1))
 
@@ -169,11 +169,11 @@ def combine_all_regions(path='', plot=True, save=True, N_rolling_average=7, scal
 
     plt.xlabel('Start of Month')
     if scale:
-            plt.ylabel('Scaled Air quality (AQI)')
-            plt.title('Scaled Average global air quality for 2019 and 2020')
+        plt.ylabel('Scaled Air quality (AQI)')
+        plt.title('Scaled Average global air quality for 2019 and 2020 ' + str(N_rolling_average) + 'day rolling average')
     else:
         plt.ylabel('Air quality (AQI)')
-        plt.title('Average global air quality for 2019 and 2020')
+        plt.title('Average global air quality for 2019 and 2020 ' + str(N_rolling_average) + ' day rolling average')
 
     if save:
         if scale:
@@ -191,9 +191,9 @@ def plot_regions(path='', plot=True, save=False, N_rolling_average=7, scale=Fals
 
     def get_label(region, year): 
         if scale:
-            return region + '-' + str(N_rolling_average) + '-day-rolling-median-' + str(year)
+            return region + ' ' + str(N_rolling_average) + ' day rolling median ' + str(year)
         else:
-            return region + '-' + str(N_rolling_average) + '-day-rolling-median-scaled' + str(year)
+            return region + ' ' + str(N_rolling_average) + ' day rolling median scaled' + str(year)
 
     for region, df in dfs.items():
         fig = plt.figure()
@@ -213,10 +213,10 @@ def plot_regions(path='', plot=True, save=False, N_rolling_average=7, scale=Fals
         plt.xlabel('Start of Month')
         if scale:
             plt.ylabel('Scaled Air quality (AQI)')
-            plt.title('Scaled Average air quality in ' + region + ' for 2019 and 2020')
+            plt.title('Scaled Average air quality in ' + region + ' for 2019 and 2020 ' + str(N_rolling_average) + ' day rolling average')
         else:
             plt.ylabel('Air quality (AQI)')
-            plt.title('Average air quality in ' + region + ' for 2019 and 2020')
+            plt.title('Average air quality in ' + region + ' for 2019 and 2020 with ' + str(N_rolling_average) + ' day rolling average')
 
         fig.set_figheight(5)
         fig.set_figwidth(15)
@@ -276,8 +276,8 @@ if __name__ == "__main__":
     plot_regions(path='../figures/', plot=False, save=True, N_rolling_average=7)
     plot_regions(path='../figures/', plot=False, save=True, N_rolling_average=30)
 
-    # combine_all_regions(path='../figures/', plot=False, save=True, N_rolling_average=7, scale=True)
-    # plot_regions(path='../figures/', plot=False, save=True, N_rolling_average=7, scale=True)
-    # plot_regions(path='../figures/', plot=False, save=True, N_rolling_average=30, scale=True)
+    combine_all_regions(path='../figures/', plot=False, save=True, N_rolling_average=7, scale=True)
+    plot_regions(path='../figures/', plot=False, save=True, N_rolling_average=7, scale=True)
+    plot_regions(path='../figures/', plot=False, save=True, N_rolling_average=30, scale=True)
 
     data_stats()
