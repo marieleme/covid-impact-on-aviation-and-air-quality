@@ -1,12 +1,38 @@
-# Datacorns - BED-2056
+# Datacorns - BED-2056 Data Science project 2020
 > Repository for project code in course Introduction to Data Science
+> By: Mariel Ellingsen, Steinar Brenna Hansen and Helle Sandsdalen
 
-## Ideas
-[ ] Relationships between death of Covid19 in states where Trump won. \
-[ ] Adoption rates during lockdown. \
-[ ] Speeding tickets  before and after a Fast&Furious premier. \
-[ ] Klimaendringer og flyvninger mm. etter lockdown. \
+This project tries to find out if some effects enforced by the pandemic have had some impact on the aviation traffic. Further, we analyze the air quality to check if it has increased. 
 
 ## Resources
-- [US crime datasets](https://knoema.com/atlas/United-States-of-America/topics/Crime-Statistics/datasets)
-- [open datasets](https://github.com/awesomedata/awesome-public-datasets)
+
+The air traffic data we have used is from the [OpenSky network 2020](https://zenodo.org/record/4266937#.X9jGrdhKiMr), which provides crowdsourced air traffic data. 
+- There is downloaded and used data from 2019-01-01 until 2020-10-31. 
+- In our project we have chosen three different airports from the USA, Asia and Europe.
+-- Europe: Paris (LFPG), England (EGLL), Amsterdam (EHAM)
+-- USA: New York (KJFK), Chicago (KORD), Los Angeles (KLAX)
+-- Asia: Delhi (VIDP), Tokyo (RJTT) and Hong Kong (VHHH)
+
+The air quality data used in this survey is collected from the [World Air Quality Index project](https://aqicn.org). 
+This collects data from many open quality sources around the world, including government funded sensor data and independent sensors.
+
+## Repository
+Flight
+- Under the flight folder in the repository you will find code that simplifies the original datasets, as well as code for plotting the graphs. 
+- There is one data frame per airports for both 2019 and 2020. These contains total number of flights per day, as well as 7 and 30 days rolling mean. These data frames are used for visualization and analysis. 
+
+Air quality
+- Under the air_quality folder you will find code that simplifies and plots the air quality results. 
+
+TSA throughput
+- The folder tsa_throughput contains the code which scrapes the web page (LINK) for the prepatory work.
+
+Figures
+- In the firgures folder all the graphs produced by the flights, air_quality and tsa_throughput code is located. 
+
+Files
+- In the files folder the final RMarkdown report and html page is located. This report uses the figures from the figure folder, produced by the code located in the other described folders. 
+
+## Additional resources
+- [CO2 emissions from passenger transport](https://www.eea.europa.eu/media/infographics/co2-emissions-from-passenger-transport/view)
+
