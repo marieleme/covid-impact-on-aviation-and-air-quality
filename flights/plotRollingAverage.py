@@ -40,9 +40,8 @@ def plotrollingAvg(airpors_region, airportnames, region, year, rollig):
 
     months = ["Jan", "Feb", "Mar", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     for index, df in enumerate(airpors_region):
-        col = df.Date.to_numpy()
         values = df[rollig + airportnames[index] + " " +  year].to_numpy()
-        plt.plot(col , values , label =airportnames[index])
+        plt.plot(values , label =airportnames[index])
 
     plt.xticks([0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334], months )
     plt.xlim(0,365)
