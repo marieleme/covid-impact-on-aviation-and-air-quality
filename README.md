@@ -9,7 +9,7 @@ In this project we examined how the pandemic impacted aviation and air quality a
 
 ## Resources
 ### Air traffic data
-The air traffic data we have used is from the [OpenSky network 2020](https://zenodo.org/record/4266937#.X9jGrdhKiMr), which provides crowdsourced air traffic data. 
+The air traffic data we have used is from the [OpenSky network 2020](https://zenodo.org/record/4299838#.X9kVSHVKg5k), which provides crowdsourced air traffic data. 
 - There is downloaded and used data from 2019-01-01 until 2020-10-31. 
 - In our project we have chosen three different airports from the USA, Asia and Europe.
 * Europe: Paris (LFPG), England (EGLL), Amsterdam (EHAM)
