@@ -21,8 +21,8 @@ This collects data from many open quality sources around the world, including go
 [TSA checkpoint travel numbers for 2020 and 2019](https://www.tsa.gov/coronavirus/passenger-throughput)
 
 ## Repository
-### Flight data
-- Under the flight folder in the repository you will find code that simplifies the original datasets, as well as code for plotting the graphs. 
+### Flights
+- Under the flights folder in the repository you will find code that simplifies the original datasets, as well as code for plotting the graphs. 
 - There is one data frame per airports for both 2019 and 2020. These contains total number of flights per day, as well as 7 and 30 days rolling mean. These data frames are used for visualization and analysis. 
 
 ### Air quality
