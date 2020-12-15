@@ -5,7 +5,7 @@
 In this project we examined how the pandemic impacted aviation and air quality around the world.
 
 ## Resources
-
+### Air traffic data
 The air traffic data we have used is from the [OpenSky network 2020](https://zenodo.org/record/4266937#.X9jGrdhKiMr), which provides crowdsourced air traffic data. 
 - There is downloaded and used data from 2019-01-01 until 2020-10-31. 
 - In our project we have chosen three different airports from the USA, Asia and Europe.
@@ -13,26 +13,28 @@ The air traffic data we have used is from the [OpenSky network 2020](https://zen
 * USA: New York (KJFK), Chicago (KORD), Los Angeles (KLAX)
 * Asia: Delhi (VIDP), Tokyo (RJTT) and Hong Kong (VHHH)
 
+### Air quality data
 The air quality data used in this survey is collected from the [World Air Quality Index project](https://aqicn.org). 
 This collects data from many open quality sources around the world, including government funded sensor data and independent sensors.
 
+### TSA data
 [TSA checkpoint travel numbers for 2020 and 2019](https://www.tsa.gov/coronavirus/passenger-throughput)
 
 ## Repository
-Flight
+### Flight data
 - Under the flight folder in the repository you will find code that simplifies the original datasets, as well as code for plotting the graphs. 
 - There is one data frame per airports for both 2019 and 2020. These contains total number of flights per day, as well as 7 and 30 days rolling mean. These data frames are used for visualization and analysis. 
 
-Air quality
+### Air quality
 - Under the air_quality folder you will find code that simplifies and plots the air quality results. 
 
-TSA throughput
+### TSA throughput 
 - The folder tsa_throughput contains the code which scrapes the web page (LINK) for the prepatory work.
 
-Figures
+### Figures
 - In the firgures folder all the graphs produced by the flights, air_quality and tsa_throughput code is located. 
 
-Files
+### Files
 - In the files folder the final RMarkdown report and html page is located. This report uses the figures from the figure folder, produced by the code located in the other described folders. 
 
 ## Additional resources
