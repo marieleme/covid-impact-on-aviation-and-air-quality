@@ -1,6 +1,6 @@
 # Datacorns - BED-2056 Data Science project 2020
+By: Mariel Ellingsen, Steinar Brenna Hansen and Helle Sandsdalen
 > Repository for project code in course Introduction to Data Science \
-> By: Mariel Ellingsen, Steinar Brenna Hansen and Helle Sandsdalen
 
 In this project we examined how the pandemic impacted aviation and air quality around the world.
 
@@ -46,3 +46,18 @@ This collects data from many open quality sources around the world, including go
 - [AQI Basics](https://www.airnow.gov/aqi/aqi-basics/)
 - [Greenhouse gas emissions from transport in Europe](https://www.eea.europa.eu/data-and-maps/indicators/transport-emissions-of-greenhouse-gases/transport-emissions-of-greenhouse-gases-12)
 
+
+## Requirements for running the code
+- python3 
+- Pandas library (v1.1.5)
+- Matplotlib library
+- Numpy library
+
+### Running the code
+You have to download the data sets from the [OpenSky network 2020](https://zenodo.org/record/4266937#.X9jGrdhKiMr) as well as the data sets from [World Air Quality Index project](https://aqicn.org). 
+- Put the flight data sets into the flight folder under a folder with name "dataset_flights".
+
+An example of running the data sets simplifier:
+- navigate to the flights folder
+- $ python3 cleanDailyData.py
+- This will produce a folder with name "dailyDataSets" which will contain data sets of the respective airports for 2019 and 2020. 
