@@ -14,7 +14,7 @@ The air traffic data we have used is from the [OpenSky network 2020](https://zen
 * Asia: Delhi (VIDP), Tokyo (RJTT) and Hong Kong (VHHH)
 
 ### Air quality data
-The air quality data used in this survey is collected from the [World Air Quality Index project](https://aqicn.org). 
+The air quality data used in this survey is collected from the [World Air Quality Index project](https://aqicn.org). \
 This collects data from many open quality sources around the world, including government funded sensor data and independent sensors.
 
 ### TSA data
