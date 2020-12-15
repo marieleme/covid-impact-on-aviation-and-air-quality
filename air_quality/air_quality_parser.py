@@ -251,17 +251,24 @@ def data_stats():
 
     global_df = pd.concat(dfs.values(), axis=1, sort=False)
 
-    mean2019, mean2020, global_improvement = calculate_means(global_df)
+    year19, year20, global_improvement = calculate_means(global_df)
 
-    print(f'global mean AQI 2019: {mean2019:.2f}, global mean AQI 2020: {mean2020:.2f}')
+    print(f'global mean AQI 2019: {year19:.2f}, global mean AQI 2020: {year20:.2f}')
     print(f'air quality in 2020 is {global_improvement:.2f}% better in our sample data')
 
     first_half_df = global_df[global_df.index < 366/2]
+    first19, first20, global_improvement = calculate_means(first_half_df)
 
-    mean2019, mean2020, global_improvement = calculate_means(first_half_df)
-
-    print(f'mean AQI first half of 2019: {mean2019:.2f}, mean AQI first half of 2020: {mean2020:.2f}')
+    print(f'mean AQI first half of 2019: {first19:.2f}, mean AQI first half of 2020: {first20:.2f}')
     print(f'air quality in 2020 is {global_improvement:.2f}% better in our sample data for first half of the year')
+
+    second_half_df = global_df[global_df.index >= 336/2]
+
+    last19, last20, global_improvement = calculate_means(second_half_df)
+
+    print(f'mean AQI last half of 2019: {last19:.2f}, mean AQI last half of 2020: {last20:.2f}')
+    print(f'air quality in 2020 is {global_improvement:.2f}% better in our sample data for second half of the year')
+
 
 if __name__ == "__main__":
     combine_all_regions(path='../figures/', plot=False, save=True, N_rolling_average=7)
