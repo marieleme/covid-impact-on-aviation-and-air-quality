@@ -138,6 +138,13 @@ concluded that the 30 days moving average was sufficient to see both the data mo
 At last, to get an overall insight on the global impact, we summarized all the 30 days moving average of the respective airports. This way, we could 
 clearly see the impact that covid-19 had globally, from our airports.  
 
+For air quality we have daily data with high day to day variance. To better show trends in the data we used a 7 and 30 day rolling median to plot the data. We also use scatter plots when comparing air quality to the flight data to show how the averages of the air quality shifts in conjunction with the flight frequency. We also tested scaling the measurements to an equal scale, but this turned out to not do much since the AQI already produces a scaled series, thus the double scale only compressed the graphs. These are not presented in the report but are included in the materials and can be found in the 
+
+Since we use 30 day right aligned plots it is important to remember that if a change happened during eg. February it would only start to appear on the graphs in march, essentially shifted a month to the left.
+
+We also calculated some broader statistics for air quality to better show how the air quality improved throughout the year. Since the lockdown was enforced stronger in the first half of the year we found the mean AQI for the first and second half of 2019 and 2020 and calculated how much it improved.
+
+
 # Final analysis
 ### Aviation
 ```{r, echo=FALSE, fig.show="hold", out.width="80%", out.height="80%",fig.align='center'}
@@ -160,3 +167,38 @@ Further, we see in all graphs that in August/September the aviation traffic incr
 To summarize, global aviation has suffered a high decrease due to the global pandemic caused by covid-19. Due to the interesting findings which substantiates our original hypothesis, we further investigated if the reduction in aviation traffic had any impact on the air quality of the respective cities. 
 
 ### Air quality
+
+
+Air quality
+
+|Period of measurement | Global mean 2019 | Global mean 2020 | Percentage improvement |
+|----------------------|------------------|------------------|------------------------|
+|first half of year    | 58.28            | 46.66            | 19.94%                 |
+|last half of year     | 57.52            | 50.94            | 11.44%                 |
+|entire year           | 58.04            | 49.10            | 15.40%                 |
+
+Our data shows that the overall air quality in 2020 was 15% better than in 2019, but that in the first half of the respective years the air quality was 20% better. This trend is also seen in the 7 day rolling average graph in figure X. We see that during the early spring and summer air quality is significantly better in 2020, but the air quality seems to return to approximately normal around september and later. 
+
+```{r, echo=FALSE, out.width="60%", out.height="60%", fig,show="hold", fig.align='center'}
+knitr::include_graphics(c("../.././figures/global_average_rolling7.png"))
+``` 
+
+Also interesting is how the different approaches to lockdown affected the air quality around the world. Figure X, Y, Z shows the 7 day rolling averages from large cities in the United States, Asia and Europe. Asia sees the largest drop in april-march and returns to about normal around september like the rest of the world. USA sees the largest improvement in february to the middle of april, before returning to relatively normal tendencies. Europe is relatively normal except for a large dip in february. 
+
+From this we can see that the air quality in Asia was better for longer than in Europe and the USA. The average air quality in Asia went from 109 in 2019 to 86 in 2020, and into around 50 at times. This gets Asia almost to the quality level of Europe and America, who generally has very good air quality. In fact it seems as if the air quality in Europe was not affected very much by the lockdown, the average in Europe was 34 in 2019 and 31 in 2020. America was slightly more affected going from 36 to 32 but these are both well within the good category for the air quality index. Asia did however drop from unhealthy to moderate on average which will be a significant improvement for the general population. 
+
+```{r, echo=FALSE, out.width="60%", out.height="60%", fig,show="hold", fig.align='center'}
+knitr::include_graphics(c("../.././figures/asia_7day_rolling_average.png"))
+``` 
+
+```{r, echo=FALSE, out.width="60%", out.height="60%", fig,show="hold", fig.align='center'}
+knitr::include_graphics(c("../.././figures/us_7day_rolling_average.png"))
+``` 
+
+```{r, echo=FALSE, out.width="60%", out.height="60%", fig,show="hold", fig.align='center'}
+knitr::include_graphics(c("../.././figures/eu_7day_rolling_average.png"))
+``` 
+
+Our most interesting findings from this is that the global air quality in the first half of 2020 was much better than the air quality in the latter half. This correlates with our findings in the flight data that travel decreased significantly around march-april but stabilized at a higher level in the later half of the year. 
+
+Ultimately our findings here are not enough to conclude that the drop in aviation caused improved air quality, as we do not control for other pollutants such as factory emissions, road transport or maritime transport. We can however conclude that both aviation and air quality were independently significantly affected by the global lockdown.
