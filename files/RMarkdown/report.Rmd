@@ -156,7 +156,7 @@ In figure X three different airports from the USA, Asia and Europe are depicted.
 
 What we can conclude from these findings, and the graphs depicted above, is that covid-19 had a massive effect on global aviation. Since the countries around the world had to close their borders the foreign flights from these airports stopped, as well as many domestic flights because of city lockdowns.
 
-```{r, echo=FALSE, out.width="60%", out.height="60%", fig,show="hold", fig.align='center'}
+```{r, echo=FALSE, out.width="60%", out.height="60%", fig.show="hold", fig.align='center'}
 knitr::include_graphics(c("../.././flights/graphs/global30days.png"))
 ``` 
 
@@ -179,7 +179,7 @@ Air quality
 
 Our data shows that the overall air quality in 2020 was 15% better than in 2019, but that in the first half of the respective years the air quality was 20% better. This trend is also seen in the 7 day rolling average graph in figure X. We see that during the early spring and summer air quality is significantly better in 2020, but the air quality seems to return to approximately normal around september and later. 
 
-```{r, echo=FALSE, out.width="60%", out.height="60%", fig,show="hold", fig.align='center'}
+```{r, echo=FALSE, out.width="60%", out.height="60%", fig1.show="hold", fig1.align='center'}
 knitr::include_graphics(c("../.././figures/global_average_rolling7.png"))
 ``` 
 
@@ -187,15 +187,15 @@ Also interesting is how the different approaches to lockdown affected the air qu
 
 From this we can see that the air quality in Asia was better for longer than in Europe and the USA. The average air quality in Asia went from 109 in 2019 to 86 in 2020, and into around 50 at times. This gets Asia almost to the quality level of Europe and America, who generally has very good air quality. In fact it seems as if the air quality in Europe was not affected very much by the lockdown, the average in Europe was 34 in 2019 and 31 in 2020. America was slightly more affected going from 36 to 32 but these are both well within the good category for the air quality index. Asia did however drop from unhealthy to moderate on average which will be a significant improvement for the general population. 
 
-```{r, echo=FALSE, out.width="60%", out.height="60%", fig,show="hold", fig.align='center'}
+```{r, echo=FALSE, out.width="60%", out.height="60%", fig2.show="hold", fig2.align='center'}
 knitr::include_graphics(c("../.././figures/asia_7day_rolling_average.png"))
 ``` 
 
-```{r, echo=FALSE, out.width="60%", out.height="60%", fig,show="hold", fig.align='center'}
+```{r, echo=FALSE, out.width="60%", out.height="60%", fig3.show="hold", fig3.align='center'}
 knitr::include_graphics(c("../.././figures/us_7day_rolling_average.png"))
 ``` 
 
-```{r, echo=FALSE, out.width="60%", out.height="60%", fig,show="hold", fig.align='center'}
+```{r, echo=FALSE, out.width="60%", out.height="60%", fig4.show="hold", fig4.align='center'}
 knitr::include_graphics(c("../.././figures/eu_7day_rolling_average.png"))
 ``` 
 

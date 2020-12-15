@@ -480,4 +480,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# Rmarkdown
+.Rhistory
+
 # End of https://www.toptal.com/developers/gitignore/api/python,linux,windows,visualstudiocode,latex
