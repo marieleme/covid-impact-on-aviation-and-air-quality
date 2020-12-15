@@ -64,7 +64,7 @@ def parse_file(filepath: str) -> pd.DataFrame:
 
     return (fname, df)
 
-def get_dataset_filepaths(parent_dir='air_quality/waqi_datasets/', subdirs=['asia', 'us', 'eu']) -> Dict[str, List[str]]:
+def get_dataset_filepaths(parent_dir='waqi_datasets/', subdirs=['asia', 'us', 'eu']) -> Dict[str, List[str]]:
     """Reads filepaths from subdirs in parent dir and returns dict with {subdir: [files_in_subdir]}."""
 
     return {sdir: list(*os.walk(parent_dir + sdir))[2] for sdir in subdirs}
@@ -99,7 +99,7 @@ def get_comparative_dataframe(filepath: str) -> pd.DataFrame:
 
 def parse_all_datasets(parent_dir='waqi_datasets/'):
 
-    datasets = get_dataset_filepaths()
+    datasets = get_dataset_filepaths(parent_dir)
     r = {}
 
     # Reads all files and maps the comparative dataframes to their region
@@ -109,12 +109,12 @@ def parse_all_datasets(parent_dir='waqi_datasets/'):
     return r
 
 
-def combined_region_dfs() -> Dict[str, DataFrame]:
+def combined_region_dfs(parent_dir='waqi_datasets/') -> Dict[str, DataFrame]:
     """ For all regions will return dataframe with 2019 and 2020 data for all cities in region and combined mean
         Returns dict{'us|eu|asia': dataframe}
     """
 
-    dfmap = parse_all_datasets()
+    dfmap = parse_all_datasets(parent_dir)
 
     region_dict = {}
 
@@ -152,7 +152,7 @@ def combine_all_regions(path='', plot=True, save=True, N_rolling_average=7, scal
     fig = plt.figure()
     ax = plt.gca()
 
-    global_df.plot(kind='line', y=['global-mean-2019', 'global-mean-2020'], ax=ax)
+    global_df.plot(kind='line', y=['global-mean-2019', 'global-mean-2020'], ax=ax, label=['global mean 2019', 'global mean 2020'])
 
     ax.xaxis.set_major_locator(dates.MonthLocator(interval=1))
 
@@ -169,17 +169,17 @@ def combine_all_regions(path='', plot=True, save=True, N_rolling_average=7, scal
 
     plt.xlabel('Start of Month')
     if scale:
-            plt.ylabel('Scaled Air quality (AQI)')
-            plt.title('Scaled Average global air quality for 2019 and 2020')
+        plt.ylabel('Scaled Air quality (AQI)')
+        plt.title('Scaled Average global air quality for 2019 and 2020 ' + str(N_rolling_average) + 'day rolling average')
     else:
         plt.ylabel('Air quality (AQI)')
-        plt.title('Average global air quality for 2019 and 2020')
+        plt.title('Average global air quality for 2019 and 2020 ' + str(N_rolling_average) + ' day rolling average')
 
     if save:
         if scale:
-            plt.savefig(path + 'scaled_global_average_rolling7.png')
+            plt.savefig(path + f'scaled_global_average_rolling{N_rolling_average}.png')
         else:
-            plt.savefig(path + 'global_average_rolling7.png')
+            plt.savefig(path + f'global_average_rolling{N_rolling_average}.png')
 
     if plot:
         plt.show()
@@ -191,9 +191,9 @@ def plot_regions(path='', plot=True, save=False, N_rolling_average=7, scale=Fals
 
     def get_label(region, year): 
         if scale:
-            return region + '-' + str(N_rolling_average) + '-day-rolling-median-' + str(year)
+            return region + ' ' + str(N_rolling_average) + ' day rolling median ' + str(year)
         else:
-            return region + '-' + str(N_rolling_average) + '-day-rolling-median-scaled' + str(year)
+            return region + ' ' + str(N_rolling_average) + ' day rolling median scaled' + str(year)
 
     for region, df in dfs.items():
         fig = plt.figure()
@@ -213,10 +213,10 @@ def plot_regions(path='', plot=True, save=False, N_rolling_average=7, scale=Fals
         plt.xlabel('Start of Month')
         if scale:
             plt.ylabel('Scaled Air quality (AQI)')
-            plt.title('Scaled Average air quality in ' + region + ' for 2019 and 2020')
+            plt.title('Scaled Average air quality in ' + region + ' for 2019 and 2020 ' + str(N_rolling_average) + ' day rolling average')
         else:
             plt.ylabel('Air quality (AQI)')
-            plt.title('Average air quality in ' + region + ' for 2019 and 2020')
+            plt.title('Average air quality in ' + region + ' for 2019 and 2020 with ' + str(N_rolling_average) + ' day rolling average')
 
         fig.set_figheight(5)
         fig.set_figwidth(15)
@@ -230,36 +230,49 @@ def plot_regions(path='', plot=True, save=False, N_rolling_average=7, scale=Fals
         if plot:
             plt.show()
 
+def calculate_means(df):
+    meancols = [
+        col for col in df.columns if 'mean' not in col]
+
+    means = df[meancols].mean()
+
+    vals2019 = [val for name, val in means.items() if '2019' in name]
+    vals2020 = [val for name, val in means.items() if '2020' in name]
+
+    mean2019 = sum(vals2019) / len(vals2019)
+    mean2020 = sum(vals2020) / len(vals2020)
+
+    global_improvement = (1 - mean2020/mean2019) * 100
+
+    return mean2019, mean2020, global_improvement
+
 def data_stats():
     dfs = combined_region_dfs()
 
     global_df = pd.concat(dfs.values(), axis=1, sort=False)
 
-    meancols = [col for col in global_df.columns if 'mean' in col]
+    year19, year20, global_improvement = calculate_means(global_df)
 
-    means = global_df[meancols].mean()
-    print(means)
-
-    mean2019 = 0.0
-    mean2020 = 0.0
-
-    for name, val in means.items():
-        if '2019' in name:
-            mean2019 += val
-        if '2020' in name:
-            mean2020 += val
-
-    mean2019 /= 3.0
-    mean2020 /= 3.0
-
-    global_improvement = (1 - mean2020/mean2019) * 100
-
-    print(f'global mean AQI 2019: {mean2019}, global mean AQI 2020: {mean2020}')
+    print(f'global mean AQI 2019: {year19:.2f}, global mean AQI 2020: {year20:.2f}')
     print(f'air quality in 2020 is {global_improvement:.2f}% better in our sample data')
+
+    first_half_df = global_df[global_df.index < 366/2]
+    first19, first20, global_improvement = calculate_means(first_half_df)
+
+    print(f'mean AQI first half of 2019: {first19:.2f}, mean AQI first half of 2020: {first20:.2f}')
+    print(f'air quality in 2020 is {global_improvement:.2f}% better in our sample data for first half of the year')
+
+    second_half_df = global_df[global_df.index >= 336/2]
+
+    last19, last20, global_improvement = calculate_means(second_half_df)
+
+    print(f'mean AQI last half of 2019: {last19:.2f}, mean AQI last half of 2020: {last20:.2f}')
+    print(f'air quality in 2020 is {global_improvement:.2f}% better in our sample data for second half of the year')
 
 
 if __name__ == "__main__":
     combine_all_regions(path='../figures/', plot=False, save=True, N_rolling_average=7)
+    combine_all_regions(path='../figures/', plot=False, save=True, N_rolling_average=30)
     plot_regions(path='../figures/', plot=False, save=True, N_rolling_average=7)
     plot_regions(path='../figures/', plot=False, save=True, N_rolling_average=30)
 
