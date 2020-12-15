@@ -29,7 +29,7 @@ This collects data from many open quality sources around the world, including go
 - Under the air_quality folder you will find code that simplifies and plots the air quality results. 
 
 ### TSA throughput 
-- The folder tsa_throughput contains the code which scrapes the web page (LINK) for the prepatory work.
+- The folder tsa_throughput contains the code which scrapes the web page [TSA checkpoint travel numbers for 2020 and 2019](https://www.tsa.gov/coronavirus/passenger-throughput) for the prepatory work.
 
 ### Figures
 - In the firgures folder all the graphs produced by the flights, air_quality and tsa_throughput code is located. 
@@ -41,7 +41,7 @@ This collects data from many open quality sources around the world, including go
 - [CO2 emissions from passenger transport](https://www.eea.europa.eu/media/infographics/co2-emissions-from-passenger-transport/view)
 - [Impact of COVID-19 on worldwide aviation](https://traffic-viz.github.io/scenarios/covid19.html)
 - [Visualization of Air Traffic during Covid-19 Pandemic](https://towardsdatascience.com/visualization-of-air-traffic-during-covid-19-pandemic-c5941b049401)
-- [The short-term impacts of COVID-19 lockdown on urban air pollution in China] (https://www.nature.com/articles/s41893-020-0581-y)
+- [The short-term impacts of COVID-19 lockdown on urban air pollution in China](https://www.nature.com/articles/s41893-020-0581-y)
 - https://www.flightradar24.com/
 - [AQI Basics](https://www.airnow.gov/aqi/aqi-basics/)
 - [Greenhouse gas emissions from transport in Europe](https://www.eea.europa.eu/data-and-maps/indicators/transport-emissions-of-greenhouse-gases/transport-emissions-of-greenhouse-gases-12)
