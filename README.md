@@ -56,7 +56,7 @@ This collects data from many open quality sources around the world, including go
 ### Running the code
 If you want to produce the simplified flights data sets yourself, you have have to download the data sets from the [OpenSky network 2020](https://zenodo.org/record/4266937#.X9jGrdhKiMr). 
 - Put the flight data sets into the flight folder under a folder with name "dataset_flights".
-- ```$ "python3 cleanDailyData.py"```
+- ```$ python3 cleanDailyData.py```
 
 An example of running the code which produces 30 days rolling average plots:
 - navigate to the flights folder
