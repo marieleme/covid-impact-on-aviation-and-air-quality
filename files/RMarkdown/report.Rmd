@@ -201,4 +201,12 @@ knitr::include_graphics(c("../.././figures/eu_7day_rolling_average.png"))
 
 Our most interesting findings from this is that the global air quality in the first half of 2020 was much better than the air quality in the latter half. This correlates with our findings in the flight data that travel decreased significantly around march-april but stabilized at a higher level in the later half of the year. 
 
+### Combined 
+Even though both the air traffic data and air quality data have been thoroughly analysed separately and remarks have been mentioned when comparing these, we decided to also visualize a combined plot of aviation and air quality. In figure X we can see a plot of air traffic data  and air quality data from Asia during january of 2020 to the start of November 2020. The line displays the number of flights during this time period, and the scatter plot visualizes the air quality. 
+```{r, echo=FALSE, fig.show="hold", out.width="80%", out.height="80%",fig.align='center'}
+knitr::include_graphics(c("../.././figures/combined_asia.png"))
+```
+
+# Conclution
+
 Ultimately our findings here are not enough to conclude that the drop in aviation caused improved air quality, as we do not control for other pollutants such as factory emissions, road transport or maritime transport. We can however conclude that both aviation and air quality were independently significantly affected by the global lockdown.
