@@ -1,5 +1,5 @@
 # Datacorns - BED-2056 Data Science project 2020
-> Repository for project code in course Introduction to Data Science
+> Repository for project code in course Introduction to Data Science \
 > By: Mariel Ellingsen, Steinar Brenna Hansen and Helle Sandsdalen
 
 This project tries to find out if some effects enforced by the pandemic have had some impact on the aviation traffic. Further, we analyze the air quality to check if it has increased. 
@@ -9,12 +9,14 @@ This project tries to find out if some effects enforced by the pandemic have had
 The air traffic data we have used is from the [OpenSky network 2020](https://zenodo.org/record/4266937#.X9jGrdhKiMr), which provides crowdsourced air traffic data. 
 - There is downloaded and used data from 2019-01-01 until 2020-10-31. 
 - In our project we have chosen three different airports from the USA, Asia and Europe.
--- Europe: Paris (LFPG), England (EGLL), Amsterdam (EHAM)
--- USA: New York (KJFK), Chicago (KORD), Los Angeles (KLAX)
--- Asia: Delhi (VIDP), Tokyo (RJTT) and Hong Kong (VHHH)
+* Europe: Paris (LFPG), England (EGLL), Amsterdam (EHAM)
+* USA: New York (KJFK), Chicago (KORD), Los Angeles (KLAX)
+* Asia: Delhi (VIDP), Tokyo (RJTT) and Hong Kong (VHHH)
 
 The air quality data used in this survey is collected from the [World Air Quality Index project](https://aqicn.org). 
 This collects data from many open quality sources around the world, including government funded sensor data and independent sensors.
+
+[TSA checkpoint travel numbers for 2020 and 2019](https://www.tsa.gov/coronavirus/passenger-throughput)
 
 ## Repository
 Flight
@@ -35,4 +37,10 @@ Files
 
 ## Additional resources
 - [CO2 emissions from passenger transport](https://www.eea.europa.eu/media/infographics/co2-emissions-from-passenger-transport/view)
+- [Impact of COVID-19 on worldwide aviation](https://traffic-viz.github.io/scenarios/covid19.html)
+- [Visualization of Air Traffic during Covid-19 Pandemic](https://towardsdatascience.com/visualization-of-air-traffic-during-covid-19-pandemic-c5941b049401)
+- [The short-term impacts of COVID-19 lockdown on urban air pollution in China] (https://www.nature.com/articles/s41893-020-0581-y)
+- https://www.flightradar24.com/
+- [AQI Basics](https://www.airnow.gov/aqi/aqi-basics/)
+- [Greenhouse gas emissions from transport in Europe](https://www.eea.europa.eu/data-and-maps/indicators/transport-emissions-of-greenhouse-gases/transport-emissions-of-greenhouse-gases-12)
 
