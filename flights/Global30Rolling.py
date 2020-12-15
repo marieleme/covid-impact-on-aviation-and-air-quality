@@ -48,7 +48,7 @@ def plot_global_total(df_2019, df_2020):
     plt.xlabel('Month')
     plt.title("All airports 30 days rolling mean")
     plt.legend()
-    plt.savefig("global30days")
+    plt.savefig("../figures/graphs_airtraffic/global30days.png")
 
 def prepare_df(continent='global'):
     airportNames = ["LFPG", "EGLL", "EHAM", "KJFK", "KORD", "KLAX", "VIDP", "RJTT", "VHHH"]

@@ -271,13 +271,13 @@ def data_stats():
 
 
 if __name__ == "__main__":
-    combine_all_regions(path='../figures/', plot=False, save=True, N_rolling_average=7)
-    combine_all_regions(path='../figures/', plot=False, save=True, N_rolling_average=30)
-    plot_regions(path='../figures/', plot=False, save=True, N_rolling_average=7)
-    plot_regions(path='../figures/', plot=False, save=True, N_rolling_average=30)
+    combine_all_regions(path='../figures/graphs_airquality/', plot=False, save=True, N_rolling_average=7)
+    combine_all_regions(path='../figures/graphs_airquality/', plot=False, save=True, N_rolling_average=30)
+    plot_regions(path='../figures/graphs_airquality/', plot=False, save=True, N_rolling_average=7)
+    plot_regions(path='../figures/graphs_airquality/', plot=False, save=True, N_rolling_average=30)
 
-    combine_all_regions(path='../figures/', plot=False, save=True, N_rolling_average=7, scale=True)
-    plot_regions(path='../figures/', plot=False, save=True, N_rolling_average=7, scale=True)
-    plot_regions(path='../figures/', plot=False, save=True, N_rolling_average=30, scale=True)
+    combine_all_regions(path='../figures/graphs_airquality/', plot=False, save=True, N_rolling_average=7, scale=True)
+    plot_regions(path='../figures/graphs_airquality/', plot=False, save=True, N_rolling_average=7, scale=True)
+    plot_regions(path='../figures/graphs_airquality/', plot=False, save=True, N_rolling_average=30, scale=True)
 
     data_stats()

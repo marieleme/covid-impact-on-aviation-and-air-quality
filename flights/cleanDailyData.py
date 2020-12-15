@@ -30,7 +30,7 @@ def convert_to_csv(airports, year):
         df['7day_rolling_' + airport + " " + year] = df[airport + " " + year].rolling(window=7, min_periods=1).mean()
         df['30day_rolling_' + airport + " " + year] = df[airport + " " + year].rolling(window=30, min_periods=1).mean()
 
-        df.to_csv("fuckthis/" + airport + "_" + year)
+        df.to_csv("dailyDataSets/" + airport + "_" + year)
 
 def main():
     airportNames = ["LFPG", "EGLL", "EHAM", "KJFK", "KORD", "KLAX", "VIDP", "RJTT", "VHHH"]

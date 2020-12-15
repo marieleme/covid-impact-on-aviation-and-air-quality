@@ -1,6 +1,6 @@
 ---
 title: "Did the pandemic help the enviroment?"
-author: "Mariel Ellingsen, Steinar Hansen og Helle Sandsdalen"
+author: "Steinar Brenna Hansen, Mariel Ellingsen og Helle Sandsdalen"
 output:
   html_document:
     df_print: paged
@@ -9,9 +9,9 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+<iframe width="100%" height="40%" src="https://www.youtube.com/embed/XjRkohW2Yhc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 # Introduction and motivation
-
 
 
 There is no question about what the biggest challenge of the 21st century is: Global climate changes. When we talk about the climate changes, 
@@ -35,11 +35,13 @@ This made us wonder *if the pandemic practically affected the air traffic, did i
 
 Before we made a deep dive into the project, we needed to confirm if our suspicion of the decreasing air traffic due to the pandemic was correct. 
 We did this by collecting data from the TSA’s (Transport security administration) [website](https://www.tsa.gov/coronavirus/passenger-throughput) 
-displaying the traveling throughput at airports in the USA in 2019 and 2020. Figure X shows the plot of this data. As it is possible to see, there 
+displaying the traveling throughput at airports in the USA in 2019 and 2020. *Figure 1* shows the plot of this data. As it is possible to see, there 
 is a huge decrease in the number of people as of Mars 2020. This is approximately at the same time as Covid-19 caused a lot of countries around the 
 world to go into lockdown. 
 
-![](../../tsa_throughput/tsa_plot_new.png) 
+```{r, echo=FALSE, out.width="100%", out.height="100%", fig.show="hold", fig.align='center', fig.cap='Figure 1'}
+knitr::include_graphics(c("../figures/graphs_tsa/tsa_plot_new.png"))
+``` 
 
 The results we found were quite interesting, and we decided to further investigate the air traffic. We were also interested to see if there were any 
 difference between the continents around the world and we therefore picked three different airports from Asia, the USA and Europe to find out more 
@@ -49,11 +51,12 @@ Since airplanes pollute the air the most per passenger, we further wanted to inv
 the decrease in air traffic were noticeable high.
 
 The cities and their residing airports we decided to look further into was: Paris (LFPG), England (EGLL), Amsterdam (EHAM), New York (KJFK), Chicago 
-(KORD), Los Angeles (KLAX), Delhi (VIDP), Tokyo (RJTT) and Hong Kong (VHHH). These cities and their positions can be seen in figure X.
+(KORD), Los Angeles (KLAX), Delhi (VIDP), Tokyo (RJTT) and Hong Kong (VHHH). These cities and their positions can be seen in *Figure 2*.
 
 
-![](../../figures/airports_placements.png) 
-
+```{r, echo=FALSE, out.width="100%", out.height="100%", fig.show="hold", fig.align='center', fig.cap='Figure 2'}
+knitr::include_graphics(c("../figures/airports_placements.png"))
+``` 
 
 # Related work
 
@@ -110,7 +113,7 @@ The air quality data used in this survey is collected from the [World Air Qualit
 quality sources around the world, including government funded sensor data and independent sensors. This results in a very comprehensive set of air 
 quality sensor data from many cities around the world.
 
-The datasets downloaded from aqicn show the computed air quality index for the measured pollutant concentrations. Air Quality Index is a value that 
+The datasets downloaded from aqicn show the computed air quality index for the measured pollutant concentrations. Air Quality Index(AQI) is a value that 
 represents the air quality of the air calculated from the measured pollutants. The value is divided into six ranges, from good at 0-50 AQI to hazardous 
 at 300+ AQI. The individual values are calculated based on the US EPA [scale](https://www.airnow.gov/aqi/aqi-basics/). The total aqi is the maximal 
 value of any of the pollutants. 
@@ -121,11 +124,11 @@ airport. A disadvantage of using only one measuring station is there could be se
 theory or the station measurements could be biased in one direction or another. 
 
 It should also be mentioned that air quality can be affected by many different factors. In 2017 27% of emissions came from the transport sector, of 
-which 71% came from the automotive industry and only 14% came from aviation. [Source.](https://www.eea.europa.eu/data-and-maps/indicators/transport-emissions-of-greenhouse-gases/transport-emissions-of-greenhouse-gases-12)
+which 71% came from the automotive industry and only 14% came from aviation. These numberf was found [here.](https://www.eea.europa.eu/data-and-maps/indicators/transport-emissions-of-greenhouse-gases/transport-emissions-of-greenhouse-gases-12)
 
 # Exploratory Analysis
 
-The goal of the visualisation of the gathered data, was to see if there was a dip in aviation during lockdown months, if there was a clear distinction 
+The goal of the visualization of the gathered data, was to see if there was a dip in aviation during lockdown months, if there was a clear distinction 
 in air quality after the lockdown months, and if both the air traffic and air quality plots would have a coherence. 
 
 To analyze and visualize the air traffic we used the data in different ways. First we extracted only the total number of flights per month per airport. 
@@ -138,7 +141,7 @@ concluded that the 30 days moving average was sufficient to see both the data mo
 At last, to get an overall insight on the global impact, we summarized all the 30 days moving average of the respective airports. This way, we could 
 clearly see the impact that covid-19 had globally, from our airports.  
 
-For air quality we have daily data with high day to day variance. To better show trends in the data we used a 7 and 30 day rolling median to plot the data. We also use scatter plots when comparing air quality to the flight data to show how the averages of the air quality shifts in conjunction with the flight frequency. We also tested scaling the measurements to an equal scale, but this turned out to not do much since the AQI already produces a scaled series, thus the double scale only compressed the graphs. These are not presented in the report but are included in the materials and can be found in the 
+For air quality we have daily data with high day to day variance. To better show trends in the data we used a 7 and 30 day rolling median to plot the data. We also use scatter plots when comparing air quality to the flight data to show how the averages of the air quality shifts in conjunction with the flight frequency. We also tested scaling the measurements to an equal scale, but this turned out to not do much since the AQI already produces a scaled series, thus the double scale only compressed the graphs. These are not presented in the report but are included in the materials and can be found under the 'figures/' folder, alongside all graphs produced in this project.  
 
 Since we use 30 day right aligned plots it is important to remember that if a change happened during eg. February it would only start to appear on the graphs in march, essentially shifted a month to the left.
 
@@ -147,20 +150,20 @@ We also calculated some broader statistics for air quality to better show how th
 
 # Final analysis
 ### Aviation
-```{r, echo=FALSE, fig.show="hold", out.width="80%", out.height="80%",fig.align='center'}
-knitr::include_graphics(c("../.././flights/graphs/30DaysRollingAvgAsia.png", "../.././flights/graphs/30DaysRollingAvgEurope.png", "../.././flights/graphs/30DaysRollingAvgUSA.png"))
+```{r, echo=FALSE, fig.show="hold", out.width="80%", out.height="80%",fig.align='center', fig.cap='Figure 3'}
+knitr::include_graphics(c(".././figures/graphs_airtraffic/30DaysRollingAvgAsia.png", ".././figures/graphs_airtraffic/30DaysRollingAvgEurope.png", ".././figures/graphs_airtraffic/30DaysRollingAvgUSA.png"))
 ``` 
 As the pandemic spread world wide, the countries around the world had to make drastic changes to try to control the spread of the virus. One of the restrictions almost all countries made was to lock down the cities and close their borders to tourists and immigrants. In theory, this would naturally decrease the aviation to and from these airports.
  
-In figure X three different airports from the USA, Asia and Europe are depicted. The top graph is the 30 days rolling average of the number of aircrafts leaving or approaching the respective airports in 2019, while the bottom graph is for the same, just 2020. From these graphs, it is possible to see that around mars/april, the aviation decreased drastically, at the same time as countries introduced the lockdown. Since we have used the 30 days rolling average, and it is calculated from January, the effects come one month later than when it actually happened. 
+In *Figure 3* three different airports from the USA, Asia and Europe are depicted. The top graph is the 30 days rolling average of the number of aircrafts leaving or approaching the respective airports in 2019, while the bottom graph is for the same, just 2020. From these graphs, it is possible to see that around mars/april, the aviation decreased drastically, at the same time as countries introduced the lockdown. Since we have used the 30 days rolling average, and it is calculated from January, the effects come one month later than when it actually happened. 
 
 What we can conclude from these findings, and the graphs depicted above, is that covid-19 had a massive effect on global aviation. Since the countries around the world had to close their borders the foreign flights from these airports stopped, as well as many domestic flights because of city lockdowns.
 
-```{r, echo=FALSE, out.width="60%", out.height="60%", fig.show="hold", fig.align='center'}
-knitr::include_graphics(c("../.././flights/graphs/global30days.png"))
+```{r, echo=FALSE, out.width="60%", out.height="60%", fig.show="hold", fig.align='center', fig.cap='Figure 4'}
+knitr::include_graphics(c(".././figures/graphs_airtraffic/global30days.png"))
 ``` 
 
-In figure X, we have summed the 30 days rolling mean of the respective airports, to get an insight of the effect combined. What we see here, which we also saw in the earlier results from each airport, is that the aviation decreased a lot. In April/May the total aviation traffic decreased with 80%. 
+In *Figure 4*, we have summed the 30 days rolling mean of the respective airports, to get an insight of the effect combined. What we see here, which we also saw in the earlier results from each airport, is that the aviation decreased a lot. In April/May the total aviation traffic decreased with 80%. 
 
 Further, we see in all graphs that in August/September the aviation traffic increases again. This may be due to the fact that countries around the world started to open up slowly, at least opening for domestic flights. People started going back to work, and companies desired that people came back to the workplace, causing the traveling to increase.
 
@@ -177,34 +180,34 @@ Air quality
 |last half of year     | 57.52            | 50.94            | 11.44%                 |
 |entire year           | 58.04            | 49.10            | 15.40%                 |
 
-Our data shows that the overall air quality in 2020 was 15% better than in 2019, but that in the first half of the respective years the air quality was 20% better. This trend is also seen in the 7 day rolling average graph in figure X. We see that during the early spring and summer air quality is significantly better in 2020, but the air quality seems to return to approximately normal around september and later. 
+Our data shows that the overall air quality in 2020 was 15% better than in 2019, but that in the first half of the respective years the air quality was 20% better. This trend is also seen in the 7 day rolling average graph in *Figure 5*. We see that during the early spring and summer air quality is significantly better in 2020, but the air quality seems to return to approximately normal around september and later. 
 
-```{r, echo=FALSE, out.width="60%", out.height="60%", fig1.show="hold", fig1.align='center'}
-knitr::include_graphics(c("../.././figures/global_average_rolling7.png"))
+```{r, echo=FALSE, out.width="100%", out.height="100%", fig.show="hold", fig.align='center', fig.cap='Figure 5'}
+knitr::include_graphics(c(".././figures/graphs_airquality/global_average_rolling7.png"))
 ``` 
 
-Also interesting is how the different approaches to lockdown affected the air quality around the world. Figure X, Y, Z shows the 7 day rolling averages from large cities in the United States, Asia and Europe. Asia sees the largest drop in april-march and returns to about normal around september like the rest of the world. USA sees the largest improvement in february to the middle of april, before returning to relatively normal tendencies. Europe is relatively normal except for a large dip in february. 
+Also interesting is how the different approaches to lockdown affected the air quality around the world. *Figure 6, 7* and *8* shows the 7 day rolling averages from large cities in the United States, Asia and Europe. Asia sees the largest drop in april-march and returns to about normal around september like the rest of the world. USA sees the largest improvement in february to the middle of april, before returning to relatively normal tendencies. Europe is relatively normal except for a large dip in february. 
 
 From this we can see that the air quality in Asia was better for longer than in Europe and the USA. The average air quality in Asia went from 109 in 2019 to 86 in 2020, and into around 50 at times. This gets Asia almost to the quality level of Europe and America, who generally has very good air quality. In fact it seems as if the air quality in Europe was not affected very much by the lockdown, the average in Europe was 34 in 2019 and 31 in 2020. America was slightly more affected going from 36 to 32 but these are both well within the good category for the air quality index. Asia did however drop from unhealthy to moderate on average which will be a significant improvement for the general population. 
 
-```{r, echo=FALSE, out.width="60%", out.height="60%", fig2.show="hold", fig2.align='center'}
-knitr::include_graphics(c("../.././figures/asia_7day_rolling_average.png"))
+```{r, echo=FALSE, out.width="100%", out.height="100%", fig.show="hold", fig.align='center', fig.cap='Figure 6'}
+knitr::include_graphics(c(".././figures/graphs_airquality/asia_7day_rolling_average.png"))
 ``` 
 
-```{r, echo=FALSE, out.width="60%", out.height="60%", fig3.show="hold", fig3.align='center'}
-knitr::include_graphics(c("../.././figures/us_7day_rolling_average.png"))
+```{r, echo=FALSE, out.width="100%", out.height="100%", fig.show="hold", fig.align='center', fig.cap='Figure 7'}
+knitr::include_graphics(c(".././figures/graphs_airquality/us_7day_rolling_average.png"))
 ``` 
 
-```{r, echo=FALSE, out.width="60%", out.height="60%", fig4.show="hold", fig4.align='center'}
-knitr::include_graphics(c("../.././figures/eu_7day_rolling_average.png"))
+```{r, echo=FALSE, out.width="100%", out.height="100%", fig.show="hold", fig.align='center', fig.cap='Figure 8'}
+knitr::include_graphics(c(".././figures/graphs_airquality/eu_7day_rolling_average.png"))
 ``` 
 
 Our most interesting findings from this is that the global air quality in the first half of 2020 was much better than the air quality in the latter half. This correlates with our findings in the flight data that travel decreased significantly around march-april but stabilized at a higher level in the later half of the year. 
 
 ### Combined 
-Even though both the air traffic data and air quality data have been thoroughly analysed separately and remarks have been mentioned when comparing these, we decided to also visualize a combined plot of aviation and air quality. In figure X we can see a plot of air traffic data  and air quality data from Asia during january of 2020 to the start of November 2020. The line displays the number of flights during this time period, and the scatter plot visualizes the air quality. 
-```{r, echo=FALSE, fig.show="hold", out.width="80%", out.height="80%",fig.align='center'}
-knitr::include_graphics(c("../.././figures/combined_asia.png"))
+Even though both the air traffic data and air quality data have been thoroughly analysed separately and remarks have been mentioned when comparing these, we decided to also visualize a combined plot of aviation and air quality. In *Figure 9* we can see a plot of air traffic data  and air quality data from Asia during january of 2020 to the start of November 2020. The line displays the number of flights during this time period, and the scatter plot visualizes the air quality. 
+```{r, echo=FALSE, fig.show="hold", out.width="80%", out.height="60%",fig.align='center', fig.cap='Figure 9'}
+knitr::include_graphics(c(".././figures/combined_asia.png"))
 ```
 
 # Conclution

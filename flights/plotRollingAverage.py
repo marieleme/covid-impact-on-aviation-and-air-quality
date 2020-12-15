@@ -62,7 +62,7 @@ def makeSubplot(airpors_2019, airports_2020, airportnames, region, rolling, figN
     plotrollingAvg(airports_2020, airportnames,  region, "2020", rolling)
 
     fig.tight_layout(pad=3.0)
-    plt.savefig(figName)
+    plt.savefig("../figures/graphs_airtraffic/"+figName)
     plt.close()
 
 

@@ -27,7 +27,6 @@ def convert_to_csv(airports, year):
             df.loc["Nov"] = [0]
             df.loc["Dec"] = [0]
 
-        print(df)
         df.to_csv("totalDataSets/" + airport + "_" + year)
 
 def main():
