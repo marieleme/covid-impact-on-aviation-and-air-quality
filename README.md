@@ -1,4 +1,4 @@
-# Datacorns - BED-2056 Data Science project 2020
+# BED-2056 Data Science project 2020
 By: Mariel Ellingsen, Steinar Brenna Hansen and Helle Sandsdalen
 > Repository for project code in course Introduction to Data Science \
 
