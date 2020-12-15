@@ -4,6 +4,9 @@ By: Mariel Ellingsen, Steinar Brenna Hansen and Helle Sandsdalen
 
 In this project we examined how the pandemic impacted aviation and air quality around the world.
 
+## Portfolio report
+### The portfolio report can be found [here](./files/report.html)
+
 ## Resources
 ### Air traffic data
 The air traffic data we have used is from the [OpenSky network 2020](https://zenodo.org/record/4266937#.X9jGrdhKiMr), which provides crowdsourced air traffic data. 
