@@ -54,7 +54,7 @@ This collects data from many open quality sources around the world, including go
 - Numpy library
 
 ### Running the code
-If you want to produce the simplified flights data sets yourself, you have have to download the data sets from the [OpenSky network 2020](https://zenodo.org/record/4266937#.X9jGrdhKiMr) as well as the data sets from [World Air Quality Index project](https://aqicn.org). 
+If you want to produce the simplified flights data sets yourself, you have have to download the data sets from the [OpenSky network 2020](https://zenodo.org/record/4266937#.X9jGrdhKiMr). 
 - Put the flight data sets into the flight folder under a folder with name "dataset_flights".
 
 An example of running the code which produces 30 days rolling average plots:
