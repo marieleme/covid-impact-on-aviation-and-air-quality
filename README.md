@@ -2,7 +2,7 @@
 > Repository for project code in course Introduction to Data Science \
 > By: Mariel Ellingsen, Steinar Brenna Hansen and Helle Sandsdalen
 
-This project tries to find out if some effects enforced by the pandemic have had some impact on the aviation traffic. Further, we analyze the air quality to check if it has increased. 
+In this project we examined how the pandemic impacted aviation and air quality around the world.
 
 ## Resources
 
