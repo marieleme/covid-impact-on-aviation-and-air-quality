@@ -177,9 +177,9 @@ def combine_all_regions(path='', plot=True, save=True, N_rolling_average=7, scal
 
     if save:
         if scale:
-            plt.savefig(path + 'scaled_global_average_rolling7.png')
+            plt.savefig(path + f'scaled_global_average_rolling{N_rolling_average}.png')
         else:
-            plt.savefig(path + 'global_average_rolling7.png')
+            plt.savefig(path + f'global_average_rolling{N_rolling_average}.png')
 
     if plot:
         plt.show()
@@ -272,6 +272,7 @@ def data_stats():
 
 if __name__ == "__main__":
     combine_all_regions(path='../figures/', plot=False, save=True, N_rolling_average=7)
+    combine_all_regions(path='../figures/', plot=False, save=True, N_rolling_average=30)
     plot_regions(path='../figures/', plot=False, save=True, N_rolling_average=7)
     plot_regions(path='../figures/', plot=False, save=True, N_rolling_average=30)
 
